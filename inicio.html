@@ -1,0 +1,49 @@
+<html>
+	<head>
+		<title>Gamestore</title>
+		<link rel="stylesheet" href="styles.css">
+	</head>
+	<link rel="shortcut icon" href="https://static.wikia.nocookie.net/memes-pedia/images/7/79/Padoru.jpg/revision/latest/scale-to-width-down/350?cb=20221202034528&path-prefix=es" type="image/x-icon">
+	<meta charset="utf-8">
+
+
+        <body>
+            <header id="navegator">
+                <img src="Multimedia/banner.png" id="logo">
+            <nav id="navegacion"> <br>
+                <center> <form action="main.php?user=<?php echo $usu;?>" Method="POST"> <input type="submit" id="seccion" value="Productos"> </form>
+                <form action="inventarios.php?user=<?php echo $usu;?>" Method="POST"> <input type="submit" id="seccion" value="Inventarios"> </form>
+                <form action="ventas.php?user=<?php echo $usu;?>" Method="POST"> <input type="submit" id="seccion" value="Ventas"> </form> </center>
+            </nav>
+    
+        </header>
+            
+        <section id="background">
+            <center>
+            <div id="title"> <h1> Productos </h1> </div>
+			<form action="busquedaproductos.php?user=<?php echo $usu;?>" Method="POST"><input type="text" placeholder="Buscar productos..." name = "busqueda" id="busqueda"></form>
+    
+            <div id="scroll";>
+
+			<td> 
+			    <form action="verproducto.php" method="GET">
+				<input type="hidden" name="ID" value="<?php echo $row['No_Producto']; ?>">
+				<input type="hidden" name="user" value="<?php echo $usu; ?>">
+				<button type="submit" id="btnProduct"> <div id="contenedor"> 
+					<img alt="" width="160px" height="160px" id="imagesize" src="data:image/jpg;base64,<?php echo base64_encode($row['Imagen']); ?>">
+					<div id="infoBox">
+					<h2> <?php echo $row['Nombre_Producto']; ?> </h2>
+					<h3> $<?php echo $row['Precio_Venta']; ?> </h3>
+		            </div>
+				    </div> </button> </form>
+	        </td>
+	    
+
+				
+            </div>
+        </section>
+    
+        
+        
+        </body>
+    </html>
