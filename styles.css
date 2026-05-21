@@ -79,6 +79,7 @@ h1,h2{
 #contenedor{
 	position: relative;
 	height: 270px;
+	width: 180px;
 	margin: 0 auto;
 	background-color: #f5f3f4;
 	padding: 10px;
@@ -114,27 +115,34 @@ h1,h2{
 	border-collapse: collapse;
 }
 
-#inventario:th, #inventario:tr, #inventario:td{
+#agregar{
+	margin-top: 1%;
+	background-color: #f5f3f4;
+	width: 1050px;
+	border-collapse: collapse;
+}
+
+#agregar:th, #agregar:tr, #agregar:td{
 	margin-top: 1%;
 	background-color: rgb(249, 221, 226);
 	text-align: center;
 }
 
-#inventario:th{
+#agregar:th{
 	font-size: 110%;
 }
 
 #imagesize{
-	width: 170px;
-	height: 170px;
+	width: 160px;
+	height: 190px;
 	border-radius: 25px;
 	border: 2px solid #d3d3d3;
 	box-shadow: 3px 3px rgba(0,0,0,0.08);
 }
 
 #imgInventario{
-	width: 100px;
-	height: 100px;
+	width: 90px;
+	height: 120px;
 
 	border-radius: 15px;
 	border: 2px solid #d3d3d3;
@@ -146,8 +154,8 @@ h1,h2{
 	color: #660708;
 	background-color: #f5f3f4;
 	position: sticky;
-	width: 210px;
-	height: 90px;
+	width: 160px;
+	height: 70px;
 	border-radius: 25px;
 	margin: 0 auto;
 }
@@ -171,14 +179,11 @@ th{
 	background-color: #d3d3d3;
 }
 
-#topBar{
-	width: 1050px;
-
-	display: flex;
-	align-items: center;
-	gap: 10px;
-
-	margin-top: 1%;
+#topBar,
+#topBar tr,
+#topBar td{
+	background-color: transparent;
+	border: none;
 }
 
 #busquedaInventario{
@@ -194,8 +199,26 @@ th{
 	color: #660708;
 
 	height: 40px;
-	width: 900px;
+	width: 945px;
 	padding-left: 12px;
+}
+
+#field{
+    font-family: Arial; font-size: 15px;
+    border: 2px solid #d3d3d3;; border-radius: 15px;
+    background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);
+    margin-left: 2.5%;
+    width: 250px;
+    text-align: center;
+}
+
+#numberField{
+	font-family: Arial; font-size: 15px;
+    border: 2px solid #d3d3d3;; border-radius: 15px;
+    background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);
+    margin-left: 2.5%;
+    width: 80px;
+    text-align: center;
 }
 
 /* BOTONES */
@@ -335,4 +358,24 @@ button{
 
 ::-webkit-scrollbar-thumb:hover{
 	background: #a4161a;
+}
+
+.custom-file-upload {
+    font-size: 15px;
+    display: inline-block;
+    background-color: rgb(255, 255, 255);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 30px;
+    border: 2px solid #d3d3d3;
+    cursor: pointer;
+}
+
+input[type="file"] {
+	display: none;
+}
+
+#vistaprevia{
+	width: 90px;
+	height: 130px;
 }

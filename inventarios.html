@@ -23,17 +23,13 @@
         <section id="background">
             <center>
             <div id="title"> <h1> Inventarios </h1> </div>
-		<div id="topBar">
 
-<form action="busquedainventario.php?user=<?php echo $usu;?>" method="POST">
-	<input type="text" placeholder="Buscar productos..." name="busqueda" id="busquedaInventario">
-</form>
-
-<form action="agregarindex.php?user=<?php echo $usu;?>" method="POST">
-	<input type="submit" id="btn" value="Agregar Productos">
-</form>
-
-</div>
+		<table id="topBar">
+			<tr>
+				<td> <form action="busqueda.html" Method="POST"><input type="text" placeholder="Buscar productos..." name = "busqueda" id="busquedaInventario"></form> </td>
+				<td> <form action="altas.html" Method="POST"> <input type="submit" id="btn" value="Agregar Productos"> </form> </td>
+		    </tr>
+	    </table>
     
             <div id="scroll";>
 
