@@ -11,17 +11,19 @@
             <header id="navegator">
                 <img src="Multimedia/banner.png" id="logo">
             <nav id="navegacion"> <br>
-                <center> <form action="main.php?user=<?php echo $usu;?>" Method="POST"> <input type="submit" id="seccion" value="Productos"> </form>
-                <form action="inventarios.php?user=<?php echo $usu;?>" Method="POST"> <input type="submit" id="seccion" value="Inventarios"> </form>
-                <form action="ventas.php?user=<?php echo $usu;?>" Method="POST"> <input type="submit" id="seccion" value="Ventas"> </form> </center>
+                <center> <form action="inicio.html" Method="POST"> <input type="submit" id="seccion" value="🏠 Inicio"> </form>
+                <form action="inventarios.html" Method="POST"> <input type="submit" id="seccion" value=" 📦 Inventarios"> </form>
+                <form action="empleados.html" Method="POST"> <input type="submit" id="seccion" value="👨‍💼 Empleados"> </form> 
+			    <form action="ventas.html" Method="POST"> <input type="submit" id="seccion" value="💳 Ventas"> </form> 
+			    <form action="intercambios.html" Method="POST"> <input type="submit" id="seccion" value="🤝 Intercambios"> </form> </center>
             </nav>
     
         </header>
             
         <section id="background">
             <center>
-            <div id="title"> <h1> Productos </h1> </div>
-			<form action="busquedaproductos.php?user=<?php echo $usu;?>" Method="POST"><input type="text" placeholder="Buscar productos..." name = "busqueda" id="busqueda"></form>
+            <div id="title"> <h1> Inicio </h1> </div>
+			<form action="busquedaproductos.php" Method="POST"><input type="text" placeholder="Buscar productos..." name = "busqueda" id="busqueda"></form>
     
             <div id="scroll";>
 

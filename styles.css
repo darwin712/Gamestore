@@ -3,7 +3,16 @@ body{
 	background-size: cover;
 	color: #660708;
 	font-family: Arial;
+
 	display: flex;
+	justify-content: center;
+	align-items: stretch;
+
+	gap: 15px;
+	margin: 0;
+	padding: 15px;
+
+	min-height: 90vh;
 }
 
 /* TITULOS */
@@ -37,7 +46,6 @@ h1,h2{
 	border: 2px solid #b1a7a6;
 	border-radius: 15px;
 	width: 303px;
-	order: 1;
 	box-shadow: 4px 4px rgba(0,0,0,0.08);
 }
 
@@ -48,15 +56,23 @@ h1,h2{
 
 /* MAIN */
 #background{
-	margin-left:1%;
-	margin-right:1%;
+	flex: 1;
+	max-width: 1150px;
+	width: 100%;
+
+	min-height: calc(90vh - 30px);
+
 	background-color: rgba(245, 243, 244, 0.58);
 	border: 2px solid #b1a7a6;
 	border-radius: 15px;
-	order: 3;
+
 	overflow: hidden;
-	max-height: 720px;
+
 	box-shadow: 4px 4px rgba(0,0,0,0.08);
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 /* PRODUCTOS */
@@ -91,12 +107,39 @@ h1,h2{
 	text-align:center;
 }
 
+#inventario{
+	margin-top: 1%;
+	background-color: #f5f3f4;
+	width: 1050px;
+	border-collapse: collapse;
+}
+
+#inventario:th, #inventario:tr, #inventario:td{
+	margin-top: 1%;
+	background-color: rgb(249, 221, 226);
+	text-align: center;
+}
+
+#inventario:th{
+	font-size: 110%;
+}
+
 #imagesize{
 	width: 170px;
 	height: 170px;
 	border-radius: 25px;
 	border: 2px solid #d3d3d3;
 	box-shadow: 3px 3px rgba(0,0,0,0.08);
+}
+
+#imgInventario{
+	width: 100px;
+	height: 100px;
+
+	border-radius: 15px;
+	border: 2px solid #d3d3d3;
+
+	object-fit: cover;
 }
 
 #infoBox,#infoBox2{
@@ -126,6 +169,33 @@ th, tr, td{
 th{
 	font-size: 110%;
 	background-color: #d3d3d3;
+}
+
+#topBar{
+	width: 1050px;
+
+	display: flex;
+	align-items: center;
+	gap: 10px;
+
+	margin-top: 1%;
+}
+
+#busquedaInventario{
+	flex: 1;
+
+	font-family: Arial;
+	font-size: 17px;
+
+	border: 2px solid #d3d3d3;
+	border-radius: 30px;
+
+	background-color: #ffffff;
+	color: #660708;
+
+	height: 40px;
+	width: 900px;
+	padding-left: 12px;
 }
 
 /* BOTONES */
@@ -231,7 +301,7 @@ button{
 	overflow: auto;
 	border: 2px solid #d3d3d3;
 	border-radius: 15px;
-	width: 1050px;
+	width: 1100px;
 }
 
 /* BUSQUEDA */
@@ -243,7 +313,7 @@ button{
 	border-radius: 30px;
 	background-color: #ffffff;
 	color: #660708;
-	width: 1050px;
+	width: 1100px;
 	height: 40px;
 	padding-left: 12px;
 }
