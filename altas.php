@@ -29,23 +29,33 @@
                 <div id="title"> <h1> Altas de Producto </h1> </div>
 
                 <div id="scroll"> 
-                    <form action="agregarProducto.php?user=<?php echo isset($usu) ? $usu : ''; ?>" method="POST">
+                    <form action="agregarProducto.php?user=<?php echo isset($usu) ? $usu : ''; ?>" method="POST" enctype="multipart/form-data">
                         <table id="agregar">
                             <tr>
+                                <th>Imagen</th>
                                 <th>Producto</th>
                                 <th>Descripción</th>
                                 <th>Precio</th>
                                 <th>Unidades</th>
+                                <th>Condición</th>
                                 <th>Clasificación</th>
                                 <th>Categoría</th>
                             </tr>
-                            <tr>          
+                            <tr>  
+                                <td>
+                                <input type="file" name="Imagen" accept="image/*" required style="display: block !important; width: 180px; visibility: visible !important; opacity: 1 !important; color: black; font-size: 12px; background-color: white;"></td> 
                                 <td><input type="text" maxlength="100" name="Nombre" id="field" placeholder="Ej. FC 26" required></td>
                                 <td><input type="text" maxlength="255" name="Descripcion" id="field" placeholder="Breve descripción..."></td>
                                 
                                 <td><input type="number" step="0.01" name="Precio" id="numberField" placeholder="0.00" required></td>
                                 <td><input type="number" name="Unidades" id="numberField" value="0" required></td>
                                 
+                                <td>
+                                    <select name="Condicion" id="field" style="width: 100%;">
+                                        <option value="NUEVO">Nuevo</option>
+                                        <option value="SEMINUEVO">Seminuevo</option>
+                                    </select>
+                                </td>
                                 <td>
                                     <select name="Clasificacion" id="field" style="width: 100%;">
                                         <option value="E (Everyone)">E (Todos)</option>

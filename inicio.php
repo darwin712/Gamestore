@@ -38,6 +38,8 @@ require_once("conexion.php");
                     
                     if ($result && $result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
+                            
+                            $ruta_imagen = ($row['Imagen'] != '') ? $row['Imagen'] : 'https://via.placeholder.com/160x160.png?text=Sin+Imagen';
                     ?>
                             <div style="display: inline-block; margin: 15px; vertical-align: top;"> 
                                 <form action="verproducto.php" method="GET">
@@ -46,10 +48,12 @@ require_once("conexion.php");
                                     
                                     <button type="submit" id="btnProduct" > 
                                         <div id="contenedor"> 
-                                            <img alt="Sin Imagen" width="160px" height="160px" id="imagesize" src="https://via.placeholder.com/160x160.png?text=Sin+Imagen">
+                                            <img alt="Portada" width="160px" height="160px" id="imagesize" src="<?php echo htmlspecialchars($ruta_imagen); ?>">
                                             
                                             <div id="infoBox">
-                                                <h2> <?php echo ($row['Nombre']); ?> </h2>
+                                                <h2> <?php echo ($row['Nombre']); ?> 
+                                                     <span style="font-size: 14px; color: #ccc;">(<?php echo ($row['Condicion']); ?>)</span>
+                                                </h2>
                                                 <h3> $<?php echo ($row['Precio']); ?> </h3>
                                             </div>
                                         </div> 

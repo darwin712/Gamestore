@@ -46,25 +46,37 @@ if (isset($_GET['id'])) {
                 <div id="title"> <h1> Modificar Producto </h1> </div>
 
                 <div id="scroll"> 
-                    <form action="actualizarProducto.php?user=<?php echo $usu; ?>" method="POST">
+                    <form action="actualizarProducto.php?user=<?php echo $usu; ?>" method="POST" enctype="multipart/form-data">
                         
                         <input type="hidden" name="Cod_Producto" value="<?php echo $row['Cod_Producto']; ?>">
+                        <input type="hidden" name="Ruta_Actual" value="<?php echo $row['Imagen']; ?>">
 
                         <table id="agregar">
                             <tr>
+                                <th>Imagen Actual</th>
                                 <th>Producto</th>
                                 <th>Descripción</th>
                                 <th>Precio</th>
                                 <th>Unidades</th>
+                                <th>Condición</th>
                                 <th>Clasificación</th>
                                 <th>Categoría</th>
                             </tr>
-                            <tr>          
+                            <tr> 
+                                <td>
+                                    <img src="<?php echo $row['Imagen']; ?>" width="50" height="50" style="display: block; margin: 0 auto 5px auto; border-radius: 4px;">
+                                    <input type="file" name="Imagen" accept="image/*" style="display: block !important; width: 180px; visibility: visible !important; opacity: 1 !important; color: black; font-size: 12px; background-color: white; margin: 0 auto;"></td>
                                 <td><input type="text" maxlength="100" name="Nombre" id="field" value="<?php echo ($row['Nombre']); ?>" required></td>
                                 <td><input type="text" maxlength="255" name="Descripcion" id="field" value="<?php echo ($row['Descripcion']); ?>"></td>
                                 <td><input type="number" step="0.01" name="Precio" id="numberField" value="<?php echo ($row['Precio']); ?>" required></td>
                                 <td><input type="number" name="Unidades" id="numberField" value="<?php echo ($row['Unidades']); ?>" required></td>
                                 
+                                <td>
+                                    <select name="Condicion" id="field" style="width: 100%;">
+                                        <option value="NUEVO" <?php echo ($row['Condicion'] == 'NUEVO') ? 'selected' : ''; ?>>Nuevo</option>
+                                        <option value="SEMINUEVO" <?php echo ($row['Condicion'] == 'SEMINUEVO') ? 'selected' : ''; ?>>Seminuevo</option>
+                                    </select>
+                                </td>
                                 <td>
                                     <select name="Clasificacion" id="field" style="width: 100%;">
                                         <option value="E (Everyone)" <?php echo ($row['Clasificacion'] == 'E (Everyone)') ? 'selected' : ''; ?>>E (Todos)</option>

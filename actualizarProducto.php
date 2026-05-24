@@ -8,10 +8,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $descripcion = $conn->real_escape_string($_POST['Descripcion']);
     $precio = $conn->real_escape_string($_POST['Precio']);
     $unidades = $conn->real_escape_string($_POST['Unidades']);
+    $condicion = $conn->real_escape_string($_POST['Condicion']);
     $clasificacion = $conn->real_escape_string($_POST['Clasificacion']);
     $categoria = $conn->real_escape_string($_POST['Cod_Categoria']);
     
     $usu = isset($_GET['user']) ? $_GET['user'] : '';
+
+    $ruta_destino = $conn->real_escape_string($_POST['Ruta_Actual']); 
+
+    if (isset($_FILES['Imagen']) && $_FILES['Imagen']['error'] === UPLOAD_ERR_OK) {
+        $nombre_archivo = basename($_FILES['Imagen']['name']);
+        $ruta_destino = "Multimedia/" . $nombre_archivo;
+        move_uploaded_file($_FILES['Imagen']['tmp_name'], $ruta_destino);
+    }
 
     $sql = "UPDATE producto SET 
                 Nombre = '$nombre', 
@@ -19,7 +28,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 Unidades = '$unidades', 
                 Clasificacion = '$clasificacion', 
                 Descripcion = '$descripcion', 
-                Cod_Categoria = '$categoria' 
+                Cod_Categoria = '$categoria',
+                Condicion = '$condicion',
+                Imagen = '$ruta_destino'
             WHERE Cod_Producto = $id_producto";
 
     if ($conn->query($sql) === TRUE) {

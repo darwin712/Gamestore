@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 24-05-2026 a las 06:05:02
+-- Tiempo de generación: 24-05-2026 a las 20:51:59
 -- Versión del servidor: 8.0.17
 -- Versión de PHP: 7.3.10
 
@@ -133,6 +133,7 @@ CREATE TABLE `intercambio` (
 
 CREATE TABLE `producto` (
   `Cod_Producto` int(11) NOT NULL,
+  `Imagen` varchar(255) NOT NULL,
   `Nombre` varchar(100) NOT NULL,
   `Precio` decimal(10,2) NOT NULL,
   `Unidades` int(10) UNSIGNED NOT NULL DEFAULT '0',
@@ -146,9 +147,10 @@ CREATE TABLE `producto` (
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`Cod_Producto`, `Nombre`, `Precio`, `Unidades`, `Clasificacion`, `Condicion`, `Descripcion`, `Cod_Categoria`) VALUES
-(1, 'The Legend of Zelda: Tears of the Kingdom', '1199.99', 8, 'T (Teen)', 'NUEVO', 'Juego de aventura y acción en mundo abierto para Nintendo Switch.', 1),
-(2, 'PlayStation 5', '10500.00', 5, 'N/A', 'NUEVO', 'Consola de videojuegos de última generación con lector de discos.', 2);
+INSERT INTO `producto` (`Cod_Producto`, `Imagen`, `Nombre`, `Precio`, `Unidades`, `Clasificacion`, `Condicion`, `Descripcion`, `Cod_Categoria`) VALUES
+(1, '', 'The Legend of Zelda: Tears of the Kingdom', '1199.99', 8, 'T (Teen)', 'NUEVO', 'Juego de aventura y acción en mundo abierto para Nintendo Switch.', 1),
+(2, '', 'PlayStation 5', '10500.00', 5, 'N/A', 'NUEVO', 'Consola de videojuegos de última generación con lector de discos.', 2),
+(4, 'Multimedia/networking-basics.png', 'Uno roblox', '15000.00', 7, 'M (Mature)', 'NUEVO', 'Uno en roblox', 1);
 
 -- --------------------------------------------------------
 
@@ -270,7 +272,7 @@ ALTER TABLE `intercambio`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `Cod_Producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Cod_Producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `venta`

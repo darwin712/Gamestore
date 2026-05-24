@@ -47,22 +47,13 @@ require_once("conexion.php");
                 <div id="scroll">
                     <?php
 
-                    // LE DEJÉ COMENTS PARA QUE ENTIENDAN QUE HACE ESTA PARTE
-
-                    // Se comprueba si la página está cargando porque se buscó algo o no
                     if (isset($_POST['busqueda']) && $_POST['busqueda'] != "") {
-                        // Si el usuario buscó algo, se atrapa el texto, real escape string es para evitar que sql confunda caracteres especiales
-                        $termino = $conn->real_escape_string($_POST['busqueda']); // termino es el texto limpio para poder hacer la consulta a la BD
-                        
-                        // Consulta con LIKE 
+                        $termino = $conn->real_escape_string($_POST['busqueda']); 
                         $sql = "SELECT * FROM producto WHERE Nombre LIKE '%$termino%' OR Descripcion LIKE '%$termino%'";
-                        
                     } else {
-                        // Si no hay búsqueda o acaban de entrar a la página cargamos todo normal
                         $sql = "SELECT * FROM producto";
                     }
 
-                    // 3. Ejecutamos la consulta (sea cual sea de las dos que haya ganado arriba)
                     $result = $conn->query($sql);
                     
                     if ($result && $result->num_rows > 0) {
@@ -70,7 +61,9 @@ require_once("conexion.php");
                         echo '<table id="inventario">
                         <thead>
                             <tr>
+                                <th>Imagen</th>
                                 <th>Producto</th>
+                                <th>Condición</th>
                                 <th>ID</th>
                                 <th>Descripcion</th>
                                 <th>Precio</th>
@@ -83,7 +76,9 @@ require_once("conexion.php");
                         while($row = $result->fetch_assoc()) {
                     ?>
                             <tr>
+                                <td><img src="<?php echo htmlspecialchars($row['Imagen']); ?>" width="50" height="50" style="border-radius: 4px;"></td>
                                 <td><?php echo htmlspecialchars($row['Nombre']); ?></td>
+                                <td><?php echo htmlspecialchars($row['Condicion']); ?></td>
                                 <td><?php echo htmlspecialchars($row['Cod_Producto']); ?></td>
                                 <td><?php echo htmlspecialchars($row['Descripcion']); ?></td>
                                 <td>$<?php echo htmlspecialchars($row['Precio']); ?></td>
@@ -105,7 +100,6 @@ require_once("conexion.php");
                         echo '</tbody></table>'; 
                         
                     } else {
-                        // Este mensaje ahora también sirve por si buscan un juego que no existe
                         echo "<p style='color: white; margin-top: 20px;'>No se encontraron productos que coincidan con tu búsqueda.</p>";
                     }
                     ?>
