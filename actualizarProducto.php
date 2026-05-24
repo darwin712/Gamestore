@@ -1,0 +1,35 @@
+<?php
+require_once("conexion.php");
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+    $id_producto = intval($_POST['Cod_Producto']);
+    $nombre = $conn->real_escape_string($_POST['Nombre']);
+    $descripcion = $conn->real_escape_string($_POST['Descripcion']);
+    $precio = $conn->real_escape_string($_POST['Precio']);
+    $unidades = $conn->real_escape_string($_POST['Unidades']);
+    $clasificacion = $conn->real_escape_string($_POST['Clasificacion']);
+    $categoria = $conn->real_escape_string($_POST['Cod_Categoria']);
+    
+    $usu = isset($_GET['user']) ? $_GET['user'] : '';
+
+    $sql = "UPDATE producto SET 
+                Nombre = '$nombre', 
+                Precio = '$precio', 
+                Unidades = '$unidades', 
+                Clasificacion = '$clasificacion', 
+                Descripcion = '$descripcion', 
+                Cod_Categoria = '$categoria' 
+            WHERE Cod_Producto = $id_producto";
+
+    if ($conn->query($sql) === TRUE) {
+        header("Location: inventarios.php?user=$usu");
+        exit();
+    } else {
+        echo "Error al intentar actualizar el registro: " . $conn->error;
+        echo "<br><br><a href='inventarios.php?user=$usu'>Regresar al inventario</a>";
+    }
+} else {
+    echo "Acceso denegado.";
+}
+?>
