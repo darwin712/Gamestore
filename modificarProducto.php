@@ -45,62 +45,79 @@ if (isset($_GET['id'])) {
             <center>
                 <div id="title"> <h1> Modificar Producto </h1> </div>
 
-                <div id="scroll"> 
-                    <form action="actualizarProducto.php?user=<?php echo $usu; ?>" method="POST" enctype="multipart/form-data">
-                        
-                        <input type="hidden" name="Cod_Producto" value="<?php echo $row['Cod_Producto']; ?>">
-                        <input type="hidden" name="Ruta_Actual" value="<?php echo $row['Imagen']; ?>">
+               <form action="actualizarProducto.php?user=<?php echo $usu; ?>" method="POST" enctype="multipart/form-data">
 
-                        <table id="agregar">
-                            <tr>
-                                <th>Imagen Actual</th>
-                                <th>Producto</th>
-                                <th>Descripción</th>
-                                <th>Precio</th>
-                                <th>Unidades</th>
-                                <th>Condición</th>
-                                <th>Clasificación</th>
-                                <th>Categoría</th>
-                            </tr>
-                            <tr> 
-                                <td>
-                                    <img src="<?php echo $row['Imagen']; ?>" width="50" height="50" style="display: block; margin: 0 auto 5px auto; border-radius: 4px;">
-                                    <input type="file" name="Imagen" accept="image/*" style="display: block !important; width: 180px; visibility: visible !important; opacity: 1 !important; color: black; font-size: 12px; background-color: white; margin: 0 auto;"></td>
-                                <td><input type="text" maxlength="100" name="Nombre" id="field" value="<?php echo ($row['Nombre']); ?>" required></td>
-                                <td><input type="text" maxlength="255" name="Descripcion" id="field" value="<?php echo ($row['Descripcion']); ?>"></td>
-                                <td><input type="number" step="0.01" name="Precio" id="numberField" value="<?php echo ($row['Precio']); ?>" required></td>
-                                <td><input type="number" name="Unidades" id="numberField" value="<?php echo ($row['Unidades']); ?>" required></td>
-                                
-                                <td>
-                                    <select name="Condicion" id="field" style="width: 100%;">
-                                        <option value="NUEVO" <?php echo ($row['Condicion'] == 'NUEVO') ? 'selected' : ''; ?>>Nuevo</option>
-                                        <option value="SEMINUEVO" <?php echo ($row['Condicion'] == 'SEMINUEVO') ? 'selected' : ''; ?>>Seminuevo</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select name="Clasificacion" id="field" style="width: 100%;">
-                                        <option value="E (Everyone)" <?php echo ($row['Clasificacion'] == 'E (Everyone)') ? 'selected' : ''; ?>>E (Todos)</option>
-                                        <option value="T (Teen)" <?php echo ($row['Clasificacion'] == 'T (Teen)') ? 'selected' : ''; ?>>T (Adolescentes)</option>
-                                        <option value="M (Mature)" <?php echo ($row['Clasificacion'] == 'M (Mature)') ? 'selected' : ''; ?>>M (Maduros)</option>
-                                        <option value="N/A" <?php echo ($row['Clasificacion'] == 'N/A') ? 'selected' : ''; ?>>N/A (Accesorios/Consolas)</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select name="Cod_Categoria" id="field" style="width: 100%;">
-                                        <option value="1" <?php echo ($row['Cod_Categoria'] == 1) ? 'selected' : ''; ?>>Videojuego</option>
-                                        <option value="2" <?php echo ($row['Cod_Categoria'] == 2) ? 'selected' : ''; ?>>Consola</option>
-                                        <option value="3" <?php echo ($row['Cod_Categoria'] == 3) ? 'selected' : ''; ?>>Accesorios</option>
-                                        <option value="4" <?php echo ($row['Cod_Categoria'] == 4) ? 'selected' : ''; ?>>Juguetes</option>
-                                    </select>
-                                </td>
-                            </tr>
-                        </table>
-                        <br>
-                        <input type="submit" value="Guardar Cambios" class="button">
-                        <br><br>
-                    </form>
-                </div>
+    <input type="hidden" name="Cod_Producto" value="<?php echo $row['Cod_Producto']; ?>">
+    <input type="hidden" name="Ruta_Actual" value="<?php echo $row['Imagen']; ?>">
+
+    <div id="formProducto">
+        <div id="imgSection">
+            <label for="file-upload" class="custom-file-upload">
+                <input type="file" accept="image/*" name="Imagen" id="file-upload">
+                <img src="<?php echo $row['Imagen']; ?>" id="vistaprevia">
+            </label>
+        </div>
+
+        <div id="datosProducto">
+            <div class="fila">
+                <input type="text" name="Nombre" class="fieldLarge" placeholder="Nombre del producto" value="<?php echo $row['Nombre']; ?>">
+            </div>
+
+            <div class="fila">
+                <textarea name="Descripcion" class="fieldLarge" placeholder="Descripción..."><?php echo $row['Descripcion']; ?></textarea>
+            </div>
+
+            <div class="filaDoble">
+                <input type="number" step="0.01" name="Precio" class="fieldSmall" placeholder="Precio" value="<?php echo $row['Precio']; ?>">
+                <input type="number" name="Unidades" class="fieldSmall" placeholder="Stock" value="<?php echo $row['Unidades']; ?>">
+            </div>
+
+            <div class="filaTriple">
+                <select name="Condicion" class="fieldSelect">
+                    <option value="NUEVO" <?php echo ($row['Condicion'] == 'NUEVO') ? 'selected' : ''; ?>>Nuevo</option>
+                    <option value="SEMINUEVO" <?php echo ($row['Condicion'] == 'SEMINUEVO') ? 'selected' : ''; ?>>Seminuevo</option>
+                </select>
+
+                <select name="Clasificacion" class="fieldSelect">
+                    <option value="E" <?php echo ($row['Clasificacion'] == 'E') ? 'selected' : ''; ?>>E</option>
+                    <option value="T" <?php echo ($row['Clasificacion'] == 'T') ? 'selected' : ''; ?>>T</option>
+                    <option value="M" <?php echo ($row['Clasificacion'] == 'M') ? 'selected' : ''; ?>>M</option>
+                </select>
+
+                <select name="Cod_Categoria" class="fieldSelect">
+                    <option value="1" <?php echo ($row['Cod_Categoria'] == 1) ? 'selected' : ''; ?>>Videojuego</option>
+                    <option value="2" <?php echo ($row['Cod_Categoria'] == 2) ? 'selected' : ''; ?>>Consola</option>
+                    <option value="3" <?php echo ($row['Cod_Categoria'] == 3) ? 'selected' : ''; ?>>Accesorio</option>
+                </select>
+            </div>
+
+            <button type="submit" id="btnAgregar">
+                Guardar Cambios
+            </button>
+
+        </div>
+
+    </div>
+
+</form>
             </center>
         </section>
+        <script>
+	const defaultFile = 'Image Icon.png';
+	
+	const file = document.getElementById( 'file-upload' );
+	const img = document.getElementById( 'vistaprevia' );
+	file.addEventListener( 'change', e => {
+		if( e.target.files[0] ){
+			const reader = new FileReader( );
+			reader.onload = function( e ){
+				img.src = e.target.result;
+			}
+			reader.readAsDataURL(e.target.files[0])
+		}else{
+			img.src = defaultFile;
+		}
+	} );
+</script>
     </body>
 </html>

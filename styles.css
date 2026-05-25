@@ -78,14 +78,14 @@ h1,h2{
 /* PRODUCTOS */
 #contenedor{
 	position: relative;
-	height: 270px;
+	height: 310px;
 	width: 180px;
 	margin: 0 auto;
 	background-color: #f5f3f4;
 	padding: 10px;
 	box-shadow: 5px 5px rgba(0,0,0,0.08);
 	border: 2px solid #d3d3d3;
-	border-radius: 30px;
+	border-radius: 15px;
 	text-align:center;
 	transition: 0.2s;
 }
@@ -133,9 +133,9 @@ h1,h2{
 }
 
 #imagesize{
-	width: 160px;
-	height: 190px;
-	border-radius: 25px;
+	width: 110px;
+	height: 160px;
+	border-radius: 5px;
 	border: 2px solid #d3d3d3;
 	box-shadow: 3px 3px rgba(0,0,0,0.08);
 }
@@ -144,7 +144,7 @@ h1,h2{
 	width: 90px;
 	height: 120px;
 
-	border-radius: 15px;
+	border-radius: 5px;
 	border: 2px solid #d3d3d3;
 
 	object-fit: cover;
@@ -152,10 +152,12 @@ h1,h2{
 
 #infoBox,#infoBox2{
 	color: #660708;
+	text-align: left;
+	padding-left: 3%;
 	background-color: #f5f3f4;
 	position: sticky;
-	width: 160px;
-	height: 70px;
+	width: 180px;
+	height: 105px;
 	border-radius: 25px;
 	margin: 0 auto;
 }
@@ -272,6 +274,8 @@ button{
 	box-shadow: 3px 3px rgba(0,0,0,0.08);
 	width: 260px;
 	height: 50px;
+
+	margin-bottom: 12px;
 }
 
 /* USER */
@@ -363,11 +367,8 @@ button{
 .custom-file-upload {
     font-size: 15px;
     display: inline-block;
-    background-color: rgb(255, 255, 255);
     color: #fff;
     text-decoration: none;
-    border-radius: 30px;
-    border: 2px solid #d3d3d3;
     cursor: pointer;
 }
 
@@ -375,7 +376,110 @@ input[type="file"] {
 	display: none;
 }
 
+#formProducto{
+	display: flex;
+
+	background-color: rgba(245,243,244,0.85);
+
+	border: 2px solid #d3d3d3;
+	border-radius: 25px;
+
+
+
+	padding: 30px;
+	margin-top: 20px;
+
+	width: 84%;
+
+	align-items: flex-start;
+}
+
+#imgSection{
+	width: 180px;
+	text-align: left;
+}
+
 #vistaprevia{
-	width: 90px;
-	height: 130px;
+	width: 150px;
+	height: 200px;
+	object-fit: cover;
+	border-radius: 5px;
+	border: 4px solid #d3d3d3;
+	background-color: white;
+}
+
+#datosProducto{
+
+	display: flex;
+	flex-direction: column;
+	width: 79%;
+
+	gap: 18px;
+}
+
+.filaDoble{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 15px;
+}
+
+.filaTriple{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 15px;
+}
+
+.fieldLarge{
+	width: 100%;
+	height: 45px;
+
+	border-radius: 20px;
+	border: 2px solid #d3d3d3;
+
+	padding-left: 15px;
+
+	font-size: 16px;
+}
+
+textarea.fieldLarge{
+	height: 100px;
+	padding-top: 12px;
+	resize: none;
+	font-family: Arial;
+}
+
+.fieldSmall,
+.fieldSelect{
+	flex: 1;
+
+	height: 45px;
+
+	border-radius: 20px;
+	border: 2px solid #d3d3d3;
+
+	padding-left: 12px;
+
+	font-size: 15px;
+}
+
+#btnAgregar{
+	background-color: #ba181b;
+	color: white;
+
+	height: 50px;
+	width: 180px;
+
+	border-radius: 25px;
+
+	font-size: 18px;
+
+	margin-top: 10px;
+
+	transition: 0.2s;
+}
+
+#btnAgregar:hover{
+	background-color: #e5383b;
+	transform: translateY(-2px);
+	cursor: pointer;
 }

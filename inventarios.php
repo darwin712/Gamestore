@@ -16,11 +16,11 @@ require_once("conexion.php");
             <img src="Multimedia/banner.png" id="logo">
             <nav id="navegacion"> <br>
                 <center> 
-                    <form action="inicio.php" Method="POST" style="display:inline-block;"> <input type="submit" id="seccion" value="🏠 Inicio"> </form>
-                    <form action="inventarios.php" Method="POST" style="display:inline-block;"> <input type="submit" id="seccion" value=" 📦 Inventarios"> </form>
-                    <form action="empleados.html" Method="POST" style="display:inline-block;"> <input type="submit" id="seccion" value="👨‍💼 Empleados"> </form> 
-                    <form action="ventas.html" Method="POST" style="display:inline-block;"> <input type="submit" id="seccion" value="💳 Ventas"> </form> 
-                    <form action="intercambios.html" Method="POST" style="display:inline-block;"> <input type="submit" id="seccion" value="🤝 Intercambios"> </form> 
+                    <form action="inicio.php" Method="POST"> <input type="submit" id="seccion" value="🏠 Inicio"> </form>
+                    <form action="inventarios.php" Method="POST"> <input type="submit" id="seccion" value=" 📦 Inventarios"> </form>
+                    <form action="empleados.html" Method="POST"> <input type="submit" id="seccion" value="👨‍💼 Empleados"> </form> 
+                    <form action="ventas.html" Method="POST"> <input type="submit" id="seccion" value="💳 Ventas"> </form> 
+                    <form action="intercambios.html" Method="POST"> <input type="submit" id="seccion" value="🤝 Intercambios"> </form> 
                 </center>
             </nav>
         </header>
@@ -76,7 +76,7 @@ require_once("conexion.php");
                         while($row = $result->fetch_assoc()) {
                     ?>
                             <tr>
-                                <td><img src="<?php echo htmlspecialchars($row['Imagen']); ?>" width="50" height="50" style="border-radius: 4px;"></td>
+                                <td><img src="<?php echo htmlspecialchars($row['Imagen']); ?>" width="50" height="50" id="imgInventario"></td>
                                 <td><?php echo htmlspecialchars($row['Nombre']); ?></td>
                                 <td><?php echo htmlspecialchars($row['Condicion']); ?></td>
                                 <td><?php echo htmlspecialchars($row['Cod_Producto']); ?></td>

@@ -15,11 +15,11 @@ require_once("conexion.php");
             <img src="Multimedia/banner.png" id="logo">
             <nav id="navegacion"> <br>
                 <center> 
-                    <form action="inicio.php" Method="POST" style="display:inline-block;"> <input type="submit" id="seccion" value="🏠 Inicio"> </form>
-                    <form action="inventarios.php" Method="POST" style="display:inline-block;"> <input type="submit" id="seccion" value=" 📦 Inventarios"> </form>
-                    <form action="empleados.html" Method="POST" style="display:inline-block;"> <input type="submit" id="seccion" value="👨‍💼 Empleados"> </form> 
-                    <form action="ventas.html" Method="POST" style="display:inline-block;"> <input type="submit" id="seccion" value="💳 Ventas"> </form> 
-                    <form action="intercambios.html" Method="POST" style="display:inline-block;"> <input type="submit" id="seccion" value="🤝 Intercambios"> </form> 
+                    <form action="inicio.php" Method="POST"> <input type="submit" id="seccion" value="🏠 Inicio"> </form>
+                    <form action="inventarios.php" Method="POST"> <input type="submit" id="seccion" value=" 📦 Inventarios"> </form>
+                    <form action="empleados.html" Method="POST"> <input type="submit" id="seccion" value="👨‍💼 Empleados"> </form> 
+                    <form action="ventas.html" Method="POST"> <input type="submit" id="seccion" value="💳 Ventas"> </form> 
+                    <form action="intercambios.html" Method="POST"> <input type="submit" id="seccion" value="🤝 Intercambios"> </form> 
                 </center>
             </nav>
         </header>
@@ -51,10 +51,10 @@ require_once("conexion.php");
                                             <img alt="Portada" width="160px" height="160px" id="imagesize" src="<?php echo htmlspecialchars($ruta_imagen); ?>">
                                             
                                             <div id="infoBox">
-                                                <h2> <?php echo ($row['Nombre']); ?> 
+                                                <p style="font-size: 16px;"> <?php echo ($row['Nombre']); ?> 
                                                      <span style="font-size: 14px; color: #ccc;">(<?php echo ($row['Condicion']); ?>)</span>
-                                                </h2>
-                                                <h3> $<?php echo ($row['Precio']); ?> </h3>
+                                                </p>
+                                                <p style="font-size: 18px; font-weight: bold;"> $<?php echo ($row['Precio']); ?> <p>
                                             </div>
                                         </div> 
                                     </button> 
