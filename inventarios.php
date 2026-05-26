@@ -29,20 +29,54 @@ require_once("conexion.php");
             <center>
                 <div id="title"> <h1> Inventarios </h1> </div>
 
-<table id="topBar">
-                    <tr>
-                        <td> 
-                            <form action="inventarios.php" Method="POST">
-                                <input type="text" placeholder="Buscar productos..." name="busqueda" id="busquedaInventario">
-                                </form> 
-                        </td>
-                        <td> 
-                            <form action="altas.php" Method="POST"> 
-                                <input type="submit" id="btn" value="Agregar Productos"> 
-                            </form> 
-                        </td>
-                    </tr>
-                </table>
+<div id="topBar">
+
+    <div id="topRow">
+
+        <form action="inventarios.php" Method="POST" id="searchForm">
+            <input type="text" placeholder="Buscar productos..." name="busqueda" id="busquedaInventario">
+        </form>
+
+        <form action="altas.php" Method="POST">
+            <input type="submit" id="btnAgregarTop" value="Agregar Productos">
+        </form>
+
+    </div>
+
+    <form action="inventarios.php" Method="POST" id="formFiltros">
+
+        <div id="filtersSection">
+
+            <select name="condicion" id="filterSelect">
+                <option value="">Todos</option>
+                <option value="Nuevo">Nuevo</option>
+                <option value="Usado">Usado</option>
+            </select>
+
+            <select name="orden" id="filterSelect">
+                <option value="">Ordenar por...</option>
+                <option value="precioASC">Precio: Menor a Mayor</option>
+                <option value="precioDESC">Precio: Mayor a Menor</option>
+                <option value="nombreASC">Nombre A-Z</option>
+                <option value="nombreDESC">Nombre Z-A</option>
+            </select>
+
+            <input type="number" name="precioMin" placeholder="Precio mínimo" id="miniField">
+
+            <input type="number" name="precioMax" placeholder="Precio máximo" id="miniField">
+
+            <label id="checkContainer">
+                <input type="checkbox" name="stock">
+                En stock
+            </label>
+
+            <input type="submit" value="Aplicar filtros" id="btnFiltro">
+
+        </div>
+
+    </form>
+
+</div>
         
                 <div id="scroll">
                     <?php
