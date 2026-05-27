@@ -1,5 +1,5 @@
 <?php
-require_once("conexion.php");
+require_once("../conexion.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
@@ -11,14 +11,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $condicion = $conn->real_escape_string($_POST['Condicion']);
     $clasificacion = $conn->real_escape_string($_POST['Clasificacion']);
     $categoria = $conn->real_escape_string($_POST['Cod_Categoria']);
-    
-    $usu = isset($_GET['user']) ? $_GET['user'] : '';
 
     $ruta_destino = $conn->real_escape_string($_POST['Ruta_Actual']); 
 
     if (isset($_FILES['Imagen']) && $_FILES['Imagen']['error'] === UPLOAD_ERR_OK) {
         $nombre_archivo = basename($_FILES['Imagen']['name']);
-        $ruta_destino = "Multimedia/" . $nombre_archivo;
+        $ruta_destino = "_Multimedia_/" . $nombre_archivo;
         move_uploaded_file($_FILES['Imagen']['tmp_name'], $ruta_destino);
     }
 
@@ -34,11 +32,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             WHERE Cod_Producto = $id_producto";
 
     if ($conn->query($sql) === TRUE) {
-        header("Location: inventarios.php?user=$usu");
+        header("Location: inventarios.php");
         exit();
     } else {
         echo "Error al intentar actualizar el registro: " . $conn->error;
-        echo "<br><br><a href='inventarios.php?user=$usu'>Regresar al inventario</a>";
+        echo "<br><br><a href='inventarios.php'>Regresar al inventario</a>";
     }
 } else {
     echo "Acceso denegado.";

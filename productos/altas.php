@@ -1,39 +1,34 @@
-<?php
-    session_start();
-    $usu = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '';
-?>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Gamestore - Agregar Producto</title>
-        <link rel="stylesheet" href="styles.css">
+        <title>Gamestore</title>
+        <link rel="stylesheet" href="../styles.css">
         <link rel="shortcut icon" href="https://static.wikia.nocookie.net/memes-pedia/images/7/79/Padoru.jpg/revision/latest/scale-to-width-down/350?cb=20221202034528&path-prefix=es" type="image/x-icon">
     </head>
     <body>
         <header id="navegator">
-            <img src="Multimedia/banner.png" id="logo">
+            <img src="../_Multimedia_/banner2.png" id="logo">
             <nav id="navegacion"> <br>
                 <center> 
-                    <form action="inicio.php" Method="POST"> <input type="submit" id="seccion" value="🏠 Inicio"> </form>
-                    <form action="inventarios.php" Method="POST"> <input type="submit" id="seccion" value=" 📦 Inventarios"> </form>
-                    <form action="empleados.html" Method="POST"> <input type="submit" id="seccion" value="👨‍💼 Empleados"> </form> 
-                    <form action="ventas.html" Method="POST"> <input type="submit" id="seccion" value="💳 Ventas"> </form> 
-                    <form action="intercambios.html" Method="POST"> <input type="submit" id="seccion" value="🤝 Intercambios"> </form> 
+                    <form action="../inicio.php" Method="POST"> <input type="submit" id="seccion" value="🏠 Inicio"> </form>
+                    <form action="../productos/inventarios.php" Method="POST"> <input type="submit" id="seccion" value=" 📦 Inventarios"> </form>
+                    <form action="../empleados/empleados.php" Method="POST"> <input type="submit" id="seccion" value="👨‍💼 Empleados"> </form> 
+                    <form action="../ventas/ventas.php" Method="POST"> <input type="submit" id="seccion" value="💳 Ventas"> </form> 
+                    <form action="../intercambios/intercambios.php" Method="POST"> <input type="submit" id="seccion" value="🤝 Intercambios"> </form> 
                 </center>
             </nav>
         </header>
             
         <section id="background">
-            <center>
-                <div id="title"> <h1> Altas de Producto </h1> </div>
-                    <form action="agregarProducto.php?user=<?php echo isset($usu) ? $usu : ''; ?>" method="POST" enctype="multipart/form-data">
+                <div id="title"> Registro </div>
+                    <form action="agregarProducto.php" method="POST" enctype="multipart/form-data">
                                 <div id="formProducto">
     <div id="imgSection">
         <label for="file-upload" class="custom-file-upload">
             <input type="file" accept="image/*" name="Imagen" id="file-upload">
 
-            <img src="Multimedia/Image Icon.png" id="vistaprevia">
+            <img src="../_Multimedia_/Image Icon2.png" id="vistaprevia">
         </label>
     </div>
 
@@ -84,7 +79,6 @@
 
 </div>
     </form>
-            </center>
         </section>
          <script>
 	const defaultFile = 'Image Icon.png';

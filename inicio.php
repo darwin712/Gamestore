@@ -12,21 +12,20 @@ require_once("conexion.php");
     </head>
     <body>
         <header id="navegator">
-            <img src="Multimedia/banner.png" id="logo">
+            <img src="_Multimedia_/banner2.png" id="logo">
             <nav id="navegacion"> <br>
                 <center> 
                     <form action="inicio.php" Method="POST"> <input type="submit" id="seccion" value="🏠 Inicio"> </form>
-                    <form action="inventarios.php" Method="POST"> <input type="submit" id="seccion" value=" 📦 Inventarios"> </form>
-                    <form action="empleados.html" Method="POST"> <input type="submit" id="seccion" value="👨‍💼 Empleados"> </form> 
-                    <form action="ventas.html" Method="POST"> <input type="submit" id="seccion" value="💳 Ventas"> </form> 
-                    <form action="intercambios.html" Method="POST"> <input type="submit" id="seccion" value="🤝 Intercambios"> </form> 
+                    <form action="../gamestore/productos/inventarios.php" Method="POST"> <input type="submit" id="seccion" value=" 📦 Inventarios"> </form>
+                    <form action="../gamestore/empleados/empleados.php" Method="POST"> <input type="submit" id="seccion" value="👨‍💼 Empleados"> </form> 
+                    <form action="../gamestore/ventas/ventas.php" Method="POST"> <input type="submit" id="seccion" value="💳 Ventas"> </form> 
+                    <form action="../gamestore/intercambios/intercambios.php" Method="POST"> <input type="submit" id="seccion" value="🤝 Intercambios"> </form> 
                 </center>
             </nav>
         </header>
             
         <section id="background">
-            <center>
-                <div id="title"> <h1> Inicio </h1> </div>
+                <div id="title"> Inicio </div>
                 <form action="busquedaproductos.php" Method="POST">
                     <input type="text" placeholder="Buscar productos..." name="busqueda" id="busqueda">
                 </form>
@@ -41,7 +40,7 @@ require_once("conexion.php");
                             
                             $ruta_imagen = ($row['Imagen'] != '') ? $row['Imagen'] : 'https://via.placeholder.com/160x160.png?text=Sin+Imagen';
                     ?>
-                            <div style="display: inline-block; margin: 15px; vertical-align: top;"> 
+                            <div style="display: inline-block; margin: 5px; vertical-align: top;"> 
                                 <form action="verproducto.php" method="GET">
                                     <input type="hidden" name="ID" value="<?php echo ($row['Cod_Producto']); ?>">
                                     <input type="hidden" name="user" value="<?php echo isset($usu) ? $usu : ''; ?>">
@@ -67,7 +66,6 @@ require_once("conexion.php");
                     }
                     ?>
                 </div>
-            </center>
         </section>
     </body>
 </html>

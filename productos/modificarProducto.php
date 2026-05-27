@@ -1,9 +1,8 @@
 <?php
-require_once("conexion.php");
+require_once("../conexion.php");
 
 if (isset($_GET['id'])) {
     $id_producto = intval($_GET['id']);
-    $usu = isset($_GET['user']) ? $_GET['user'] : '';
 
     $sql = "SELECT * FROM producto WHERE Cod_Producto = $id_producto";
     $result = $conn->query($sql);
@@ -24,28 +23,27 @@ if (isset($_GET['id'])) {
     <head>
         <meta charset="utf-8">
         <title>Gamestore - Modificar Producto</title>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="../styles.css">
         <link rel="shortcut icon" href="https://static.wikia.nocookie.net/memes-pedia/images/7/79/Padoru.jpg/revision/latest/scale-to-width-down/350?cb=20221202034528&path-prefix=es" type="image/x-icon">
     </head>
     <body>
         <header id="navegator">
-            <img src="Multimedia/banner.png" id="logo">
+            <img src="../_Multimedia_/banner2.png" id="logo">
             <nav id="navegacion"> <br>
                 <center> 
-                    <form action="inicio.php" Method="POST" style="display:inline-block;"> <input type="submit" id="seccion" value="🏠 Inicio"> </form>
-                    <form action="inventarios.php" Method="POST" style="display:inline-block;"> <input type="submit" id="seccion" value=" 📦 Inventarios"> </form>
-                    <form action="empleados.html" Method="POST" style="display:inline-block;"> <input type="submit" id="seccion" value="👨‍💼 Empleados"> </form> 
-                    <form action="ventas.html" Method="POST" style="display:inline-block;"> <input type="submit" id="seccion" value="💳 Ventas"> </form> 
-                    <form action="intercambios.html" Method="POST" style="display:inline-block;"> <input type="submit" id="seccion" value="🤝 Intercambios"> </form> 
+                    <form action="../inicio.php" Method="POST"> <input type="submit" id="seccion" value="🏠 Inicio"> </form>
+                    <form action="../productos/inventarios.php" Method="POST"> <input type="submit" id="seccion" value=" 📦 Inventarios"> </form>
+                    <form action="../empleados/empleados.php" Method="POST"> <input type="submit" id="seccion" value="👨‍💼 Empleados"> </form> 
+                    <form action="../ventas/ventas.php" Method="POST"> <input type="submit" id="seccion" value="💳 Ventas"> </form> 
+                    <form action="../intercambios/intercambios.php" Method="POST"> <input type="submit" id="seccion" value="🤝 Intercambios"> </form> 
                 </center>
             </nav>
         </header>
             
         <section id="background">
-            <center>
-                <div id="title"> <h1> Modificar Producto </h1> </div>
+                <div id="title"> Modificar Producto </div>
 
-               <form action="actualizarProducto.php?user=<?php echo $usu; ?>" method="POST" enctype="multipart/form-data">
+               <form action="actualizarProducto.php" method="POST" enctype="multipart/form-data">
 
     <input type="hidden" name="Cod_Producto" value="<?php echo $row['Cod_Producto']; ?>">
     <input type="hidden" name="Ruta_Actual" value="<?php echo $row['Imagen']; ?>">
@@ -54,22 +52,22 @@ if (isset($_GET['id'])) {
         <div id="imgSection">
             <label for="file-upload" class="custom-file-upload">
                 <input type="file" accept="image/*" name="Imagen" id="file-upload">
-                <img src="<?php echo $row['Imagen']; ?>" id="vistaprevia">
+                <img src="<?php echo '../' . $row['Imagen']; ?>" id="vistaprevia">
             </label>
         </div>
 
         <div id="datosProducto">
             <div class="fila">
-                <input type="text" name="Nombre" class="fieldLarge" placeholder="Nombre del producto" value="<?php echo $row['Nombre']; ?>">
+                <input type="text" name="Nombre" class="fieldLarge" placeholder="Nombre del producto" value="<?php echo $row['Nombre']; ?>" required>
             </div>
 
             <div class="fila">
-                <textarea name="Descripcion" class="fieldLarge" placeholder="Descripción..."><?php echo $row['Descripcion']; ?></textarea>
+                <textarea name="Descripcion" class="fieldLarge" placeholder="Descripción..." required><?php echo $row['Descripcion']; ?></textarea>
             </div>
 
             <div class="filaDoble">
-                <input type="number" step="0.01" name="Precio" class="fieldSmall" placeholder="Precio" value="<?php echo $row['Precio']; ?>">
-                <input type="number" name="Unidades" class="fieldSmall" placeholder="Stock" value="<?php echo $row['Unidades']; ?>">
+                <input type="number" step="0.01" name="Precio" class="fieldSmall" placeholder="Precio" value="<?php echo $row['Precio']; ?>" required>
+                <input type="number" name="Unidades" class="fieldSmall" placeholder="Stock" value="<?php echo $row['Unidades']; ?>" required>
             </div>
 
             <div class="filaTriple">
@@ -100,7 +98,6 @@ if (isset($_GET['id'])) {
     </div>
 
 </form>
-            </center>
         </section>
         <script>
 	const defaultFile = 'Image Icon.png';

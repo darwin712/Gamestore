@@ -1,5 +1,5 @@
 <?php
-require_once("conexion.php");
+require_once("../conexion.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
@@ -14,18 +14,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ruta_destino = "";
     if (isset($_FILES['Imagen']) && $_FILES['Imagen']['error'] === UPLOAD_ERR_OK) {
         $nombre_archivo = basename($_FILES['Imagen']['name']);
-        $ruta_destino = "Multimedia/" . $nombre_archivo;
+        $ruta_destino = "_Multimedia_/" . $nombre_archivo;
         move_uploaded_file($_FILES['Imagen']['tmp_name'], $ruta_destino);
     } else {
-        $ruta_destino = "Multimedia/Image Icon.png"; 
+        $ruta_destino = "_Multimedia_/Image Icon.png"; 
     }
 
     $sql = "INSERT INTO producto (Nombre, Precio, Unidades, Clasificacion, Descripcion, Cod_Categoria, Condicion, Imagen) 
             VALUES ('$nombre', '$precio', '$unidades', '$clasificacion', '$descripcion', '$categoria', '$condicion', '$ruta_destino')";
 
     if ($conn->query($sql) === TRUE) {
-        $usu = isset($_GET['user']) ? $_GET['user'] : '';
-        header("Location: inventarios.php?user=$usu");
+        header("Location: inventarios.php");
         exit();
     } else {
         echo "Hubo un error al agregar el producto: " . $conn->error;

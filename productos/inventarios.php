@@ -1,5 +1,5 @@
 <?php
-require_once("conexion.php");
+require_once("../conexion.php");
 
 ?>
 
@@ -8,26 +8,25 @@ require_once("conexion.php");
     <head>
         <meta charset="utf-8">
         <title>Gamestore</title>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="../styles.css">
         <link rel="shortcut icon" href="https://static.wikia.nocookie.net/memes-pedia/images/7/79/Padoru.jpg/revision/latest/scale-to-width-down/350?cb=20221202034528&path-prefix=es" type="image/x-icon">
     </head>
     <body>
         <header id="navegator">
-            <img src="Multimedia/banner.png" id="logo">
+            <img src="../_Multimedia_/banner2.png" id="logo">
             <nav id="navegacion"> <br>
                 <center> 
-                    <form action="inicio.php" Method="POST"> <input type="submit" id="seccion" value="🏠 Inicio"> </form>
-                    <form action="inventarios.php" Method="POST"> <input type="submit" id="seccion" value=" 📦 Inventarios"> </form>
-                    <form action="empleados.html" Method="POST"> <input type="submit" id="seccion" value="👨‍💼 Empleados"> </form> 
-                    <form action="ventas.html" Method="POST"> <input type="submit" id="seccion" value="💳 Ventas"> </form> 
-                    <form action="intercambios.html" Method="POST"> <input type="submit" id="seccion" value="🤝 Intercambios"> </form> 
+                    <form action="../inicio.php" Method="POST"> <input type="submit" id="seccion" value="🏠 Inicio"> </form>
+                    <form action="../productos/inventarios.php" Method="POST"> <input type="submit" id="seccion" value=" 📦 Inventarios"> </form>
+                    <form action="../empleados/empleados.php" Method="POST"> <input type="submit" id="seccion" value="👨‍💼 Empleados"> </form> 
+                    <form action="../ventas/ventas.php" Method="POST"> <input type="submit" id="seccion" value="💳 Ventas"> </form> 
+                    <form action="../intercambios/intercambios.php" Method="POST"> <input type="submit" id="seccion" value="🤝 Intercambios"> </form> 
                 </center>
             </nav>
         </header>
             
         <section id="background">
-            <center>
-                <div id="title"> <h1> Inventarios </h1> </div>
+                <div id="title"> Inventarios </div>
 
                 <div id="topBar">
 
@@ -102,6 +101,7 @@ require_once("conexion.php");
             <!-- <input type="submit" value="Aplicar filtros" id="btnFiltro"> -->
 
         </div>
+        <button type="submit" hidden></button>
         </form>
 </div>
         
@@ -182,7 +182,7 @@ require_once("conexion.php");
                         while($row = $result->fetch_assoc()) {
                     ?>
                             <tr>
-                                <td><img src="<?php echo htmlspecialchars($row['Imagen']); ?>" width="50" height="50" id="imgInventario"></td>
+                                <td><img src="<?php echo '../' . htmlspecialchars($row['Imagen']); ?>" width="50" height="50" id="imgInventario"></td>
                                 <td><?php echo htmlspecialchars($row['Nombre']); ?></td>
                                 <td><?php echo htmlspecialchars($row['Condicion']); ?></td>
                                 <td><?php echo htmlspecialchars($row['Cod_Producto']); ?></td>
@@ -190,12 +190,12 @@ require_once("conexion.php");
                                 <td>$<?php echo htmlspecialchars($row['Precio']); ?></td>
                                 <td><?php echo htmlspecialchars($row['Unidades']); ?></td>
                                 <td>
-                                    <form action="modificarProducto.php?id=<?php echo $row['Cod_Producto'];?>&user=<?php echo isset($usu) ? $usu : ''; ?>" method="POST">
+                                    <form action="modificarProducto.php?id=<?php echo $row['Cod_Producto'];?>" method="POST">
                                         <input type="submit" value="Modificar">
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="eliminarProducto.php?id=<?php echo $row['Cod_Producto'];?>&user=<?php echo isset($usu) ? $usu : ''; ?>" method="POST">
+                                    <form action="eliminarProducto.php?id=<?php echo $row['Cod_Producto'];?>" method="POST">
                                         <input type="submit" value="Eliminar">
                                     </form>
                                 </td>
@@ -210,7 +210,6 @@ require_once("conexion.php");
                     }
                     ?>
                 </div>
-            </center>
         </section>
     </body>
 </html>
