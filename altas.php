@@ -40,18 +40,18 @@
     <div id="datosProducto">
 
         <div class="fila">
-            <input type="text" name="Nombre" class="fieldLarge" placeholder="Nombre del producto">
+            <input type="text" name="Nombre" class="fieldLarge" placeholder="Nombre del producto" required>
         </div>
 
         <div class="fila">
-            <textarea name="Descripcion" class="fieldLarge" placeholder="Descripción..."></textarea>
+            <textarea name="Descripcion" class="fieldLarge" placeholder="Descripción..." required></textarea>
         </div>
 
         <div class="filaDoble">
 
-            <input type="number" step="0.01" name="Precio" class="fieldSmall" placeholder="Precio">
+            <input type="number" step="0.01" name="Precio" class="fieldSmall" placeholder="Precio" required>
 
-            <input type="number" name="Unidades" class="fieldSmall" placeholder="Stock">
+            <input type="number" name="Unidades" class="fieldSmall" placeholder="Stock" required>
 
         </div>
 

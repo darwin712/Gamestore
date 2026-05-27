@@ -181,22 +181,7 @@ th{
 	background-color: #d3d3d3;
 }
 
-#busquedaInventario{
-	flex: 1;
 
-	font-family: Arial;
-	font-size: 17px;
-
-	border: 2px solid #d3d3d3;
-	border-radius: 30px;
-
-	background-color: #ffffff;
-	color: #660708;
-
-	height: 40px;
-	width: 945px;
-	padding-left: 12px;
-}
 
 #field{
     font-family: Arial; font-size: 15px;
@@ -241,7 +226,6 @@ input[type="checkbox"]{
 	border-radius: 25px;
 	width: 25px;
 	height: 25px;
-	appearance: none;
 }
 
 /* BOTONES GENERALES */
@@ -315,7 +299,7 @@ button{
 /* SCROLL */
 #scroll{
 	background-color: rgba(245,243,244,0.85);
-	margin-top: 1.5%;
+	margin-top: 1%;
 	margin-bottom: 1.5%;
 	max-height: 550px;
 	overflow: auto;
@@ -394,7 +378,7 @@ input[type="file"] {
 
 #vistaprevia{
 	width: 150px;
-	height: 200px;
+	height: 220px;
 	object-fit: cover;
 	border-radius: 5px;
 	border: 4px solid #d3d3d3;
@@ -481,6 +465,8 @@ textarea.fieldLarge{
 #topBar{
 	width: 1100px;
 	margin-top: 15px;
+	background-color: rgba(245,243,244,0.5);
+	border-radius: 30px;
 }
 
 /* FILA SUPERIOR */
@@ -498,8 +484,8 @@ textarea.fieldLarge{
 }
 
 #busquedaInventario{
-	width: 100%;
-	height: 45px;
+	width: 98%;
+	height: 40px;
 
 	padding-left: 15px;
 
@@ -515,17 +501,21 @@ textarea.fieldLarge{
 
 /* BOTON AGREGAR */
 #btnAgregarTop{
-	height: 45px;
-	width: 93%;
-
+	height: 40px;
+	margin-top: 0.5%;
+	margin-right: 82%;
 	font-size: 15px;
 
-	border-radius: 25px;
+	border: 1px solid #d3d3d3;
+	border-radius: 20px;
+	background-color: #f5f3f4;
+	color: #660708;
+	box-shadow: 3px 3px rgba(0,0,0,0.08);
 }
 
 /* FORM FILTROS */
 #formFiltros{
-	margin-top: 15px;
+	margin-top: 3px;
 }
 
 /* CONTENEDOR FILTROS */
@@ -538,13 +528,10 @@ textarea.fieldLarge{
 
 	width: 97%;
 
-	background-color: rgba(245,243,244,0.75);
-
 	padding-left: 12px;
 	padding-right: 12px;
 
-	border: 2px solid #d3d3d3;
-	border-radius: 25px;
+	border-radius: 15px;
 }
 
 /* SELECTS */

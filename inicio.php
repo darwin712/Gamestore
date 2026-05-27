@@ -63,7 +63,7 @@ require_once("conexion.php");
                     <?php
                         } 
                     } else {
-                        echo "<p style='color: white; margin-top: 20px;'>No hay productos disponibles por el momento.</p>";
+                        echo "<p> No hay productos disponibles por el momento.</p>";
                     }
                     ?>
                 </div>
