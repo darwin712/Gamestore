@@ -30,7 +30,7 @@ require_once("../conexion.php");
 
                 <div id="topBar">
 
-    <form action="inventarios.php" method="POST" id="formFiltros">
+    <form action="empleados.php" method="POST" id="formFiltros">
 
     <div id="topRow">
 
@@ -102,20 +102,13 @@ require_once("../conexion.php");
                         $sql .= " AND (Nombre LIKE '%$termino%' OR Apellido_Paterno LIKE '%$termino%' OR Apellido_Materno LIKE '%$termino%')";
                     }
 
-                    if (isset($_POST['condicion']) && $_POST['condicion'] != "") {
-                        $condicion = $conn->real_escape_string($_POST['condicion']);
-                        $sql .= " AND Condicion = '$condicion'";
+                    if (isset($_POST['turno']) && $_POST['turno'] != "") {
+                        $turno = $conn->real_escape_string($_POST['turno']);
+                        $sql .= " AND Turno = '$turno'";
                     }
 
                     if (isset($_POST['orden'])) {
                         switch ($_POST['orden']) {
-                            case "precioASC":
-                                $sql .= " ORDER BY Precio ASC";
-                            break;
-                                
-                            case "precioDESC":
-                                $sql .= " ORDER BY Precio DESC";
-                            break;
                                 
                             case "nombreASC":
                                 $sql .= " ORDER BY Nombre ASC";
