@@ -1,3 +1,6 @@
+<?php
+require_once("../conexion.php");
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -69,6 +72,28 @@
                 <option value="3">Accesorio</option>
             </select>
 
+        </div>
+
+        <div class="fila" style="text-align: left; padding: 10px 0;">
+            <label style="color: BLACK; font-weight: bold; margin-bottom: 5px; display: block;">Etiquetas (Selecciona varias):</label>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+                <?php
+                $sql_etiquetas = "SELECT Cod_Etiqueta, Nombre FROM etiqueta ORDER BY Nombre ASC";
+                $resultado_etiquetas = $conn->query($sql_etiquetas);
+
+                if ($resultado_etiquetas && $resultado_etiquetas->num_rows > 0) {
+                    while ($row_etq = $resultado_etiquetas->fetch_assoc()) {
+                        echo '<label style="color: black; cursor: pointer;">';
+                        echo '<input type="checkbox" name="etiquetas[]" value="' . $row_etq['Cod_Etiqueta'] . '"> ';
+                        echo htmlspecialchars($row_etq['Nombre']);
+                        echo '</label>';
+                    }
+                } else {
+                    echo '<span style="color: #000000;">No hay etiquetas registradas en el sistema.</span>';
+                }
+                ?>
+            </div>
         </div>
 
         <button type="submit" id="btnAgregar">

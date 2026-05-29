@@ -85,6 +85,37 @@ require_once("../conexion.php");
                 ?>>Nombre Z-A</option>
             </select>
 
+            <select name="categoria" id="filterSelect">
+                <option value="">Todas las Categorías</option>
+                <?php
+                $sql_cat = "SELECT Cod_Categoria, Nombre FROM categoria";
+                $res_cat = $conn->query($sql_cat);
+                while ($row_cat = $res_cat->fetch_assoc()) {
+                    $id_cat = $row_cat['Cod_Categoria'];
+                    $nombre_cat = $row_cat['Nombre'];
+                    $seleccionado = (isset($_POST['categoria']) && $_POST['categoria'] == $id_cat) ? "selected" : "";
+                    
+                    echo "<option value='$id_cat' $seleccionado>$nombre_cat</option>";
+                }
+                ?>
+            </select>
+
+            <select name="etiqueta" id="filterSelect">
+                <option value="">Todas las Etiquetas</option>
+                <?php
+                $sql_etq = "SELECT Cod_Etiqueta, Nombre FROM etiqueta";
+                $res_etq = $conn->query($sql_etq);
+                while ($row_etq = $res_etq->fetch_assoc()) {
+                    $id_etq = $row_etq['Cod_Etiqueta'];
+                    $nombre_etq = $row_etq['Nombre'];
+                    
+                    $seleccionado = (isset($_POST['etiqueta']) && $_POST['etiqueta'] == $id_etq) ? "selected" : "";
+                    
+                    echo "<option value='$id_etq' $seleccionado>$nombre_etq</option>";
+                }
+                ?>
+            </select>
+
             <input type="number" name="precioMin" placeholder="Precio mínimo" id="miniField" value="<?php echo isset($_POST['precioMin']) ? $_POST['precioMin'] : ''; ?>">
 
             <input type="number" name="precioMax" placeholder="Precio máximo" id="miniField" value="<?php echo isset($_POST['precioMax']) ? $_POST['precioMax'] : ''; ?>">
@@ -138,6 +169,16 @@ require_once("../conexion.php");
 
                     if (isset($_POST['stock'])) {
                         $sql .= " AND Unidades > 0";
+                    }
+
+                    if (isset($_POST['categoria']) && $_POST['categoria'] != "") {
+                        $cat_id = intval($_POST['categoria']);
+                        $sql .= " AND Cod_Categoria = $cat_id";
+                    }
+
+                    if (isset($_POST['etiqueta']) && $_POST['etiqueta'] != "") {
+                        $etq_id = intval($_POST['etiqueta']);
+                        $sql .= " AND Cod_Producto IN (SELECT Cod_Producto FROM productoetiqueta WHERE Cod_Etiqueta = $etq_id)";
                     }
 
                     if (isset($_POST['orden'])) {

@@ -89,6 +89,45 @@ if (isset($_GET['id'])) {
                 </select>
             </div>
 
+            <div class="fila" style="text-align: left; padding: 15px 0;">
+                <label style="color: black; font-weight: bold; margin-bottom: 10px; display: block;">Etiquetas del producto:</label>
+                
+                <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+                    <?php
+                   
+                    $etiquetas_actuales = []; 
+                    $sql_asignadas = "SELECT Cod_Etiqueta FROM productoetiqueta WHERE Cod_Producto = $id_producto";
+                    $resultado_asignadas = $conn->query($sql_asignadas);
+                    
+                    if ($resultado_asignadas && $resultado_asignadas->num_rows > 0) {
+                        while ($row_asignada = $resultado_asignadas->fetch_assoc()) {
+                            $etiquetas_actuales[] = $row_asignada['Cod_Etiqueta']; 
+                        }
+                    }
+
+                    $sql_etiquetas = "SELECT Cod_Etiqueta, Nombre FROM etiqueta ORDER BY Nombre ASC";
+                    $resultado_etiquetas = $conn->query($sql_etiquetas);
+
+                    if ($resultado_etiquetas && $resultado_etiquetas->num_rows > 0) {
+                        while ($row_etq = $resultado_etiquetas->fetch_assoc()) {
+                            
+                            $id_etq = $row_etq['Cod_Etiqueta'];
+                            $nombre_etq = htmlspecialchars($row_etq['Nombre']);
+                            
+                            $marcado = in_array($id_etq, $etiquetas_actuales) ? 'checked' : '';
+
+                            echo '<label style="color: black; cursor: pointer;">';
+                            echo '<input type="checkbox" name="etiquetas[]" value="' . $id_etq . '" ' . $marcado . '> ';
+                            echo $nombre_etq;
+                            echo '</label>';
+                        }
+                    } else {
+                        echo '<span style="color: #000000;">No hay etiquetas registradas en la base de datos.</span>';
+                    }
+                    ?>
+                </div>
+            </div>
+
             <button type="submit" id="btnAgregar">
                 Guardar Cambios
             </button>

@@ -1,10 +1,11 @@
 <?php
-
 require_once("../conexion.php");
 
 if (isset($_GET['id'])) {
-    
     $id_producto = intval($_GET['id']); 
+
+    $sql_etiquetas = "DELETE FROM productoetiqueta WHERE Cod_Producto = $id_producto";
+    $conn->query($sql_etiquetas);
 
     $sql = "DELETE FROM producto WHERE Cod_Producto = $id_producto";
 
