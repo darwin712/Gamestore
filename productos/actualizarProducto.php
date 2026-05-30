@@ -17,8 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_FILES['Imagen']) && $_FILES['Imagen']['error'] === UPLOAD_ERR_OK) {
         $nombre_archivo = basename($_FILES['Imagen']['name']);
         
-        $ruta_bd = "_Multimedia_/" . $nombre_archivo;
-        $ruta_fisica = "../_Multimedia_/" . $nombre_archivo;
+        $ruta_bd = "_Portadas_/" . $nombre_archivo;
+        $ruta_fisica = "../_Portadas_/" . $nombre_archivo;
         
         if (move_uploaded_file($_FILES['Imagen']['tmp_name'], $ruta_fisica)) {
             chmod($ruta_fisica, 0777); 
