@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         move_uploaded_file($_FILES['Imagen']['tmp_name'], $ruta_fisica);
         
     } else {
-        $ruta_bd = "_Multimedia_/Image Icon.png"; 
+        $ruta_bd = "_Multimedia_/Image Icon2.png"; 
     }
 
     $sql = "INSERT INTO producto (Nombre, Precio, Unidades, Clasificacion, Descripcion, Cod_Categoria, Condicion, Imagen) 

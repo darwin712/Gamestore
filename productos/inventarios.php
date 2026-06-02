@@ -136,7 +136,7 @@ require_once("../conexion.php");
         </form>
 </div>
         
-                <div id="scroll">
+                <div id="scroll2">
                     <form action="altas.php" Method="POST">
                         <input type="submit" id="btnAgregarTop" value="Agregar Productos">
                     </form>
@@ -236,7 +236,7 @@ require_once("../conexion.php");
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="eliminarProducto.php?id=<?php echo $row['Cod_Producto'];?>" method="POST">
+                                    <form action="eliminarProducto.php?id=<?php echo $row['Cod_Producto'];?>" method="POST" onsubmit="return confirm('¿Deseas eliminar este producto? Esta acción no se puede deshacer.');">
                                         <input type="submit" value="Eliminar">
                                     </form>
                                 </td>

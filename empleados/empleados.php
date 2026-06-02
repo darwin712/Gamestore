@@ -86,7 +86,7 @@ require_once("../conexion.php");
         </form>
 </div>
         
-                <div id="scroll">
+                <div id="scroll2">
                     <form action="altasEmpleados.php" Method="POST">
                         <input type="submit" id="btnAgregarTop" value="Registrar Empleado">
                     </form>
@@ -155,7 +155,7 @@ require_once("../conexion.php");
                                     </form>
                                 </td>
                                 <td>
-                                    <form action="darDeBaja.php?id=<?php echo $row['Cod_Empleado'];?>" method="POST">
+                                    <form action="darDeBaja.php?id=<?php echo $row['Cod_Empleado'];?>" method="POST" onsubmit="return confirm('¿Deseas dar de baja a este empleado? Esta acción es permanente.');">
                                         <input type="submit" value="Dar de baja">
                                     </form>
                                 </td>
