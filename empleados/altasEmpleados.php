@@ -26,10 +26,6 @@
                     <form action="registrarEmpleado.php" method="POST" enctype="multipart/form-data">
                                 <div id="formProducto">
 
-    <div id="imgSection">
-        <img src="../_Multimedia_/Empleado Icon.png" id="vistaprevia">
-    </div>
-
     <div id="datosProducto">
 
         <div class="fila">

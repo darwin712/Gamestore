@@ -42,16 +42,12 @@ if (isset($_GET['id'])) {
         </header>
             
         <section id="background">
-                <div id="title"> Registro </div>
+                <div id="title"> Editar datos del empleado </div>
                     <form action="actualizarEmpleado.php" method="POST" enctype="multipart/form-data">
 
                     <input type="hidden" name="Cod_Empleado" value="<?php echo $row['Cod_Empleado']; ?>">
 
                                 <div id="formProducto">
-
-    <div id="imgSection">
-        <img src="../_Multimedia_/Empleado Icon.png" id="vistaprevia">
-    </div>
 
     <div id="datosProducto">
 

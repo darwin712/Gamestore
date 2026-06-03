@@ -147,7 +147,6 @@ require_once("../conexion.php");
                         while($row = $result->fetch_assoc()) {
                     ?>
                             <tr>
-                                <td><img src="../_Multimedia_/Empleado Icon.png" width="50" height="50"></td>
                                 <td><?php echo htmlspecialchars($row['Nombre']); ?></td>
                                 <td><?php echo htmlspecialchars($row['Apellido_Paterno']); ?></td>
                                 <td><?php echo htmlspecialchars($row['Apellido_Materno']); ?></td>
