@@ -25,15 +25,12 @@ function mostrarAlerta($titulo, $mensaje) {
 if (isset($_GET['id'])) {
     $id_producto = intval($_GET['id']); 
 
-    $sql_etiquetas = "DELETE FROM productoetiqueta WHERE Cod_Producto = $id_producto";
-    $conn->query($sql_etiquetas);
-
-    $sql = "DELETE FROM producto WHERE Cod_Producto = $id_producto";
+    $sql = "UPDATE producto SET Activo = 0 WHERE Cod_Producto = $id_producto";
 
     if ($conn->query($sql) === TRUE) {
-        mostrarAlerta('¡Producto Eliminado!', 'El producto ha sido eliminado correctamente del inventario.');
+        mostrarAlerta('¡Producto Eliminado!', 'El producto ha sido retirado del inventario activo correctamente. (El historial de ventas se mantiene intacto).');
     } else {
-        mostrarAlerta('Error de Eliminación', 'Hubo un error al intentar eliminar el producto: ' . $conn->error);
+        mostrarAlerta('Error de Eliminación', 'Hubo un error al intentar actualizar el estado del producto: ' . $conn->error);
     }
 } else {
     mostrarAlerta('Acceso Denegado', 'No se especificó ningún producto válido para eliminar.');

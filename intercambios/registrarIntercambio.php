@@ -29,15 +29,15 @@
     }
 
     if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-        mostrarAlerta('Acceso denegado', 'No se enviaron datos.', 'error');
+        mostrarAlerta('Acceso denegado', 'No se enviaron datos.');
     }
 
     if(empty($_SESSION['CarritoIntercambio'])){
-        mostrarAlerta('Carrito Vacío', 'No hay productos en el intercambio.', 'warning');
+        mostrarAlerta('Carrito Vacío', 'No hay productos en el intercambio.');
     }
 
     if(!isset($_POST['Empleado']) || $_POST['Empleado'] === ''){
-        mostrarAlerta('Faltan Datos', 'Debes seleccionar un empleado responsable.', 'warning');
+        mostrarAlerta('Faltan Datos', 'Debes seleccionar un empleado responsable.');
     }
 
     $varEmpleado = intval($_POST['Empleado']);
@@ -53,7 +53,7 @@
                        VALUES ('$fecha', '$montoTotal', '$varEmpleado')";
 
     if($conn->query($sqlIntercambio) !== TRUE){
-        mostrarAlerta('Error de Registro', 'No se pudo guardar el intercambio.', 'error');
+        mostrarAlerta('Error de Registro', 'No se pudo guardar el encabezado del intercambio.');
     }
 
     $idIntercambio = $conn->insert_id;
@@ -71,9 +71,9 @@
 
         if($conn->query($sqlDetalle) !== TRUE){
             if ($conn->errno == 1062) {
-                mostrarAlerta('Producto Duplicado', 'Intentaste registrar el mismo producto dos veces. Revisa el estado o agrupa las cantidades.', 'error');
+                mostrarAlerta('Producto Duplicado', 'Intentaste registrar exactamente el mismo producto con el mismo estado dos veces. Agrupa las cantidades.');
             } else {
-                mostrarAlerta('Error de Base de Datos', 'Error al guardar el detalle: ' . $conn->error, 'error');
+                mostrarAlerta('Error de Base de Datos', 'Error al guardar el detalle: ' . $conn->error);
             }
         }
 
@@ -85,5 +85,5 @@
 
     $_SESSION['CarritoIntercambio'] = [];
     
-    mostrarAlerta('¡Éxito!', 'El intercambio se ha registrado correctamente.', 'success');
+    mostrarAlerta('¡Éxito!', 'El intercambio se ha registrado correctamente.');
 ?>

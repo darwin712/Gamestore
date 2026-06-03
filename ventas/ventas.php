@@ -31,6 +31,9 @@
             } else {
                 $_SESSION['Carrito'][$productoSeleccionado]['Cantidad'] += $cantidadSeleccionada;
             }
+
+            header('Location: ventas.php');
+            exit;
         }
     } 
 ?>
@@ -39,7 +42,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Gamestore - Ventas</title>
+        <title>Gamestore</title>
         <link rel="stylesheet" href="../styles.css">
         <link rel="shortcut icon" href="https://static.wikia.nocookie.net/memes-pedia/images/7/79/Padoru.jpg/revision/latest/scale-to-width-down/350?cb=20221202034528&path-prefix=es" type="image/x-icon">
     </head>
@@ -48,18 +51,18 @@
             <img src="../_Multimedia_/banner2.png" id="logo">
             <nav id="navegacion"> <br>
                 <center> 
-                    <form action="../inicio.php" method="POST"> <input type="submit" id="seccion" value="🏠 Inicio"> </form>
-                    <form action="../productos/inventarios.php" method="POST"> <input type="submit" id="seccion" value=" 📦 Inventarios"> </form>
-                    <form action="../empleados/empleados.php" method="POST"> <input type="submit" id="seccion" value="👨‍💼 Empleados"> </form> 
-                    <form action="../ventas/ventas.php" method="POST"> <input type="submit" id="seccion" value="💳 Ventas"> </form> 
-                    <form action="../intercambios/intercambios.php" method="POST"> <input type="submit" id="seccion" value="🤝 Intercambios"> </form> 
+                    <button type="button" id="seccion" onclick="window.location.href='../inicio.php'"> <img src="../_Multimedia_/inicio.png" class="icono-nav"> Inicio </button>
+                    <button type="button" id="seccion" onclick="window.location.href='../productos/inventarios.php'"> <img src="../_Multimedia_/inventarios.png" class="icono-nav"> Inventarios </button>
+                    <button type="button" id="seccion" onclick="window.location.href='../empleados/empleados.php'"> <img src="../_Multimedia_/empleados.png" class="icono-nav"> Empleados </button> 
+                    <button type="button" id="seccion" onclick="window.location.href='../ventas/ventas.php'"> <img src="../_Multimedia_/ventas.png" class="icono-nav"> Ventas </button> 
+                    <button type="button" id="seccion" onclick="window.location.href='../intercambios/intercambios.php'"> <img src="../_Multimedia_/intercambios.png" class="icono-nav"> Intercambios </button>
                 </center>
             </nav>
         </header>
             
         <section id="background">
             <div id="title"> Ventas </div>
-
+            
             <div id="intercambioWrapper">
 
                 <div id="bloqueAgregar">
@@ -69,7 +72,7 @@
                             <select name="producto" class="fieldSelect" required>
                                 <option value="">Selecciona un producto</option>
                                 <?php
-                                    $sql_cat = "SELECT Cod_producto, Nombre FROM producto WHERE Unidades > 0";
+                                    $sql_cat = "SELECT Cod_producto, Nombre FROM producto WHERE Unidades > 0 AND Activo = 1";
                                     $res_cat = $conn->query($sql_cat);
                                     while ($row_producto = $res_cat->fetch_assoc()) {
                                         $id_producto = $row_producto['Cod_producto'];
@@ -119,7 +122,7 @@
                         <select name="Empleado" class="fieldSelect" required>
                             <option value="">Empleado responsable</option>
                             <?php
-                                $sql_cat = "SELECT Cod_Empleado, Nombre, Apellido_Paterno, Apellido_Materno FROM empleado";
+                                $sql_cat = "SELECT Cod_Empleado, Nombre, Apellido_Paterno, Apellido_Materno FROM empleado WHERE Activo = 1";
                                 $res_cat = $conn->query($sql_cat);
                                 while ($row_Cod_empleado = $res_cat->fetch_assoc()) {
                                     $Cod_empleado = $row_Cod_empleado['Cod_Empleado'];
@@ -132,6 +135,10 @@
                         </select>
                         <input type="submit" value="Registrar venta">
                     </form>
+                </div>
+
+                <div style="margin: 0;">
+                    <input type="button" id="btnAgregarTop" value="Ver Historial de Ventas" style="padding: 10px 20px;" onclick="window.location.href='historialVentas.php'">
                 </div>
 
             </div>

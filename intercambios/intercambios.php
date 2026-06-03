@@ -37,6 +37,9 @@
                         'Cantidad'      => $cantidadSeleccionada
                     ];
                 }
+
+                header('Location: intercambios.php');
+                exit;
             }
         }
     }
@@ -64,12 +67,12 @@
         <header id="navegator">
             <img src="../_Multimedia_/banner2.png" id="logo">
             <nav id="navegacion"> <br>
-                <center>
-                    <form action="../inicio.php" method="POST">                          <input type="submit" id="seccion" value="🏠 Inicio"> </form>
-                    <form action="../productos/inventarios.php" method="POST">           <input type="submit" id="seccion" value="📦 Inventarios"> </form>
-                    <form action="../empleados/empleados.php" method="POST">             <input type="submit" id="seccion" value="👨‍💼 Empleados"> </form>
-                    <form action="../ventas/ventas.php" method="POST">                   <input type="submit" id="seccion" value="💳 Ventas"> </form>
-                    <form action="../intercambios/intercambios.php" method="POST">       <input type="submit" id="seccion" value="🤝 Intercambios"> </form>
+                <center> 
+                    <button type="button" id="seccion" onclick="window.location.href='../inicio.php'"> <img src="../_Multimedia_/inicio.png" class="icono-nav"> Inicio </button>
+                    <button type="button" id="seccion" onclick="window.location.href='../productos/inventarios.php'"> <img src="../_Multimedia_/inventarios.png" class="icono-nav"> Inventarios </button>
+                    <button type="button" id="seccion" onclick="window.location.href='../empleados/empleados.php'"> <img src="../_Multimedia_/empleados.png" class="icono-nav"> Empleados </button> 
+                    <button type="button" id="seccion" onclick="window.location.href='../ventas/ventas.php'"> <img src="../_Multimedia_/ventas.png" class="icono-nav"> Ventas </button> 
+                    <button type="button" id="seccion" onclick="window.location.href='../intercambios/intercambios.php'"> <img src="../_Multimedia_/intercambios.png" class="icono-nav"> Intercambios </button>
                 </center>
             </nav>
         </header>
@@ -85,7 +88,7 @@
                             <select name="producto" class="fieldSelect" required>
                                 <option value="">Selecciona un producto</option>
                                 <?php
-                                    $sql_prod = "SELECT Cod_Producto, Nombre FROM producto WHERE Unidades > 0";
+                                    $sql_prod = "SELECT Cod_Producto, Nombre FROM producto WHERE Unidades > 0 AND Activo = 1";
                                     $res_prod = $conn->query($sql_prod);
                                     while($row_prod = $res_prod->fetch_assoc()):
                                         $sel = (isset($_POST['producto']) && $_POST['producto'] == $row_prod['Cod_Producto']) ? 'selected' : '';
@@ -149,7 +152,7 @@
                         <select name="Empleado" class="fieldSelect" required>
                             <option value=""> Empleado responsable</option>
                             <?php
-                                $sql_emp = "SELECT Cod_Empleado, Nombre, Apellido_Paterno FROM empleado";
+                                $sql_emp = "SELECT Cod_Empleado, Nombre, Apellido_Paterno FROM empleado WHERE Activo = 1";
                                 $res_emp = $conn->query($sql_emp);
                                 while($row_emp = $res_emp->fetch_assoc()):
                                     echo "<option value='{$row_emp['Cod_Empleado']}'>{$row_emp['Nombre']} {$row_emp['Apellido_Paterno']}</option>";
@@ -158,6 +161,10 @@
                         </select>
                         <input type="submit" value="Registrar intercambio">
                     </form>
+                </div>
+
+                <div style="margin: 0;">
+                    <input type="button" id="btnAgregarTop" value="Ver Historial de Intercambios" style="padding: 10px 20px;" onclick="window.location.href='historialIntercambios.php'">
                 </div>
 
             </div>

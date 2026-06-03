@@ -26,13 +26,13 @@ if (isset($_GET['id'])) {
     
     $id_empleado = intval($_GET['id']); 
 
-    $sql = "DELETE FROM empleado WHERE Cod_Empleado = $id_empleado";
+    $sql = "UPDATE empleado SET Activo = 0 WHERE Cod_Empleado = $id_empleado";
     $resultado = $conn->query($sql);
 
     if ($resultado === TRUE) {
-        mostrarAlerta('¡Baja Exitosa!', 'El empleado ha sido dado de baja del sistema permanentemente.');
+        mostrarAlerta('¡Baja Exitosa!', 'El empleado ha sido dado de baja del sistema correctamente.');
     } else {
-        mostrarAlerta('Error de Eliminación', 'Hubo un error al intentar eliminar al empleado: ' . $conn->error);
+        mostrarAlerta('Error al Dar de Baja', 'Hubo un error al intentar actualizar el estado del empleado: ' . $conn->error);
     }
 } else {
     mostrarAlerta('Acceso Denegado', 'No se especificó ningún empleado válido para dar de baja.');
