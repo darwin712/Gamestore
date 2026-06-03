@@ -90,7 +90,7 @@ require_once("conexion.php");
             </select>
 
             <select name="categoria" id="filterSelect">
-                <option value="">Todas las Categorías</option>
+                <option value="">Categoría</option>
                 <?php
                 $sql_cat = "SELECT Cod_Categoria, Nombre FROM categoria";
                 $res_cat = $conn->query($sql_cat);
@@ -102,10 +102,32 @@ require_once("conexion.php");
                     echo "<option value='$id_cat' $seleccionado>$nombre_cat</option>";
                 }
                 ?>
+
+            </select>
+                <select name="clasificacion" id="filterSelect">
+                <option value="">Clasificación</option>
+                <option value="E"
+                <?php
+                if (isset($_POST['clasificacion']) && $_POST['clasificacion'] == "E") {
+                    echo "selected";
+                }
+                ?>>E</option>
+
+                <option value="T" <?php
+                if (isset($_POST['clasificacion']) && $_POST['clasificacion'] == "T") {
+                    echo "selected";
+                }
+                ?>>T</option>
+
+                <option value="M" <?php
+                if (isset($_POST['clasificacion']) && $_POST['clasificacion'] == "M") {
+                    echo "selected";
+                }
+                ?>>M</option>
             </select>
 
             <select name="etiqueta" id="filterSelect">
-                <option value="">Todas las Etiquetas</option>
+                <option value="">Etiquetas</option>
                 <?php
                 $sql_etq = "SELECT Cod_Etiqueta, Nombre FROM etiqueta";
                 $res_etq = $conn->query($sql_etq);
@@ -173,6 +195,11 @@ require_once("conexion.php");
                     if (isset($_POST['categoria']) && $_POST['categoria'] != "") {
                         $cat_id = intval($_POST['categoria']);
                         $sql .= " AND Cod_Categoria = $cat_id";
+                    }
+
+                    if (isset($_POST['clasificacion']) && $_POST['clasificacion'] != "") {
+                        $clasificacion = $conn->real_escape_string($_POST['clasificacion']);
+                        $sql .= " AND Clasificacion = '$clasificacion'";
                     }
 
                     if (isset($_POST['etiqueta']) && $_POST['etiqueta'] != "") {

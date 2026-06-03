@@ -71,6 +71,7 @@ require_once("../conexion.php");
                 <option value="1">Videojuego</option>
                 <option value="2">Consola</option>
                 <option value="3">Accesorio</option>
+                <option value="4">Juguetes</option>
             </select>
 
         </div>
