@@ -72,15 +72,56 @@
     $idIntercambio = $conn->insert_id;
 
     foreach($_SESSION['CarritoIntercambio'] as $item){
-        $cod_producto   = intval($item['Cod_Producto']);
+        $cod_producto_original = intval($item['Cod_Producto']);
         $precio_unit    = floatval($item['Precio']);
         $estado         = $conn->real_escape_string($item['Estado']);
         $cantidad       = intval($item['Cantidad']);
 
+        $sqlOriginal = "SELECT * FROM producto WHERE Cod_Producto = $cod_producto_original";
+        $resOriginal = $conn->query($sqlOriginal);
+        $rowOriginal = $resOriginal->fetch_assoc();
+
+        $nombre = $conn->real_escape_string($rowOriginal['Nombre']);
+        
+        $condicion_destino = ($estado === 'Excelente') ? 'NUEVO' : 'SEMINUEVO';
+
+        $sqlBuscar = "SELECT Cod_Producto FROM producto WHERE Nombre = '$nombre' AND Condicion = '$condicion_destino' AND Activo = 1 LIMIT 1";
+        $resBuscar = $conn->query($sqlBuscar);
+
+        if ($resBuscar->num_rows > 0) {
+            $rowBuscado = $resBuscar->fetch_assoc();
+            $id_producto_final = $rowBuscado['Cod_Producto'];
+        } else {
+            $precioBase = floatval($rowOriginal['Precio']);
+            
+            $precioReventa = ($condicion_destino === 'NUEVO') ? $precioBase : round($precioBase * 0.80, 2); 
+            
+            $imagen = $conn->real_escape_string($rowOriginal['Imagen']);
+            $clasificacion = $conn->real_escape_string($rowOriginal['Clasificacion']);
+            $descripcion = $conn->real_escape_string($rowOriginal['Descripcion']);
+            $categoria = intval($rowOriginal['Cod_Categoria']);
+
+            $sqlInsertNuevo = "INSERT INTO producto (Imagen, Nombre, Precio, Unidades, Clasificacion, Condicion, Descripcion, Cod_Categoria, Activo) 
+                               VALUES ('$imagen', '$nombre', '$precioReventa', 0, '$clasificacion', '$condicion_destino', '$descripcion', '$categoria', 1)";
+            
+            if ($conn->query($sqlInsertNuevo) === TRUE) {
+                $id_producto_final = $conn->insert_id;
+
+                $sqlTags = "SELECT Cod_Etiqueta FROM productoetiqueta WHERE Cod_Producto = $cod_producto_original";
+                $resTags = $conn->query($sqlTags);
+                while($rowTag = $resTags->fetch_assoc()){
+                    $idEtq = intval($rowTag['Cod_Etiqueta']);
+                    $conn->query("INSERT INTO productoetiqueta (Cod_Producto, Cod_Etiqueta) VALUES ($id_producto_final, $idEtq)");
+                }
+            } else {
+                mostrarAlerta('Error de Base de Datos', 'Error al generar la variante de inventario: ' . $conn->error);
+            }
+        }
+
         $sqlDetalle = "INSERT INTO detalleintercambio
                            (Cod_Intercambio, Cod_Producto, Precio_Unitario, Estado_Producto, Cantidad)
                        VALUES
-                           ('$idIntercambio', '$cod_producto', '$precio_unit', '$estado', '$cantidad')";
+                           ('$idIntercambio', '$id_producto_final', '$precio_unit', '$estado', '$cantidad')";
 
         if($conn->query($sqlDetalle) !== TRUE){
             if ($conn->errno == 1062) {
@@ -92,11 +133,11 @@
 
         $sqlActualizar = "UPDATE producto
                           SET Unidades = Unidades + $cantidad
-                          WHERE Cod_Producto = $cod_producto";
+                          WHERE Cod_Producto = $id_producto_final";
         $conn->query($sqlActualizar);
     }
 
     $_SESSION['CarritoIntercambio'] = [];
     
-    mostrarAlerta('¡Éxito!', 'El intercambio se ha registrado correctamente.');
+    mostrarAlerta('¡Éxito!', 'El intercambio se ha registrado y el inventario correspondiente ha sido actualizado.');
 ?>

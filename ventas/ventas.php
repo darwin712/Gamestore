@@ -73,11 +73,12 @@
                             <select name="producto" class="fieldSelect" required>
                                 <option value="">Selecciona un producto</option>
                                 <?php
-                                    $sql_cat = "SELECT Cod_producto, Nombre, Unidades FROM producto WHERE Activo = 1";
+                                    $sql_cat = "SELECT Cod_producto, Nombre, Unidades, Condicion FROM producto WHERE Activo = 1 ORDER BY Nombre ASC, Condicion ASC";
                                     $res_cat = $conn->query($sql_cat);
                                     while ($row_producto = $res_cat->fetch_assoc()) {
                                         $id_producto = $row_producto['Cod_producto'];
-                                        $nombre_producto = $row_producto['Nombre'];
+                                        
+                                        $nombre_producto = $row_producto['Nombre'] . " (" . $row_producto['Condicion'] . ")";
                                         $unidades = $row_producto['Unidades'];
                                         
                                         $estado = ($unidades <= 0) ? "disabled" : "";

@@ -89,13 +89,20 @@
                             <select name="producto" class="fieldSelect" required>
                                 <option value="">Selecciona un producto</option>
                                 <?php
-                                    $sql_prod = "SELECT Cod_Producto, Nombre, Unidades FROM producto WHERE Activo = 1";
+                                    $sql_prod = "SELECT 
+                                                    COALESCE(MAX(CASE WHEN Condicion = 'NUEVO' THEN Cod_Producto ELSE NULL END), MAX(Cod_Producto)) AS Cod_Producto, 
+                                                    Nombre 
+                                                 FROM producto 
+                                                 WHERE Activo = 1 
+                                                 GROUP BY Nombre 
+                                                 ORDER BY Nombre ASC";
+                                    
                                     $res_prod = $conn->query($sql_prod);
                                     while($row_prod = $res_prod->fetch_assoc()):
-                                        $sel = (isset($_POST['producto']) && $_POST['producto'] == $row_prod['Cod_Producto']) ? 'selected' : '';
-                                        $disabled = ($row_prod['Unidades'] <= 0) ? 'disabled' : '';
-                                        $texto = ($row_prod['Unidades'] <= 0) ? $row_prod['Nombre'] . " (Sin Stock)" : $row_prod['Nombre'];
-                                        echo "<option value='{$row_prod['Cod_Producto']}' $sel $disabled>$texto</option>";
+                                        $id_producto = $row_prod['Cod_Producto'];
+                                        $sel = (isset($_POST['producto']) && $_POST['producto'] == $id_producto) ? 'selected' : '';
+                                        
+                                        echo "<option value='{$id_producto}' $sel>{$row_prod['Nombre']}</option>";
                                     endwhile;
                                 ?>
                             </select>

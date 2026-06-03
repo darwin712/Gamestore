@@ -9,6 +9,16 @@ if (isset($_GET['id'])) {
 
     if ($result && $result->num_rows > 0) {
         $row = $result->fetch_assoc();
+        
+        $nombre_juego = $conn->real_escape_string($row['Nombre']);
+        $sql_versiones = "SELECT Cod_Producto, Condicion FROM producto WHERE Nombre = '$nombre_juego' AND Activo = 1";
+        $res_versiones = $conn->query($sql_versiones);
+        
+        $versiones_disponibles = [];
+        while($v = $res_versiones->fetch_assoc()) {
+            $versiones_disponibles[$v['Condicion']] = $v['Cod_Producto'];
+        }
+
     } else {
         echo "El producto no existe en la base de datos.";
         exit();
@@ -60,7 +70,23 @@ if (isset($_GET['id'])) {
 
             <div class="filaTriple">
                 
-                <h4 style="text-align: left;"> Condición: <?php echo $row['Condicion']; ?></h4>
+                <h4 style="text-align: left; display: flex; align-items: center; gap: 10px;"> 
+                    Condición: 
+                    <select class="fieldSelect" style="width: auto; margin: 0; padding: 5px; cursor: pointer;" onchange="window.location.href='verProducto.php?id=' + this.value">
+                        <?php
+                        if (isset($versiones_disponibles['NUEVO'])) {
+                            $seleccionado = ($row['Condicion'] == 'NUEVO') ? 'selected' : '';
+                            echo "<option value='" . $versiones_disponibles['NUEVO'] . "' $seleccionado>NUEVO</option>";
+                        }
+                        
+                        if (isset($versiones_disponibles['SEMINUEVO'])) {
+                            $seleccionado = ($row['Condicion'] == 'SEMINUEVO') ? 'selected' : '';
+                            echo "<option value='" . $versiones_disponibles['SEMINUEVO'] . "' $seleccionado>SEMINUEVO</option>";
+                        }
+                        ?>
+                    </select>
+                </h4>
+
                 <h4 style="text-align: left;"> Clasificación: <?php echo $row['Clasificacion']; ?></h4>
 
                 <h4 style="text-align: left;"> <?php

@@ -165,17 +165,18 @@ require_once("conexion.php");
                 <div id="scroll">
                     <?php
 
-                    $sql = "SELECT * FROM producto WHERE Activo = 1";
+                    $sql = "SELECT 
+                                Nombre, 
+                                MAX(Imagen) AS Imagen, 
+                                MAX(Precio) AS Precio, 
+                                GROUP_CONCAT(DISTINCT Condicion ORDER BY Condicion ASC SEPARATOR ' y ') AS CondicionCombinada,
+                                COALESCE(MAX(CASE WHEN Condicion = 'NUEVO' THEN Cod_Producto ELSE NULL END), MAX(Cod_Producto)) AS Cod_Producto
+                            FROM producto 
+                            WHERE Activo = 1";
 
                     if (isset($_POST['busqueda']) && $_POST['busqueda'] != "") {
                         $termino = $conn->real_escape_string($_POST['busqueda']);
-                        
                         $sql .= " AND (Nombre LIKE '%$termino%' OR Descripcion LIKE '%$termino%')";
-                    }
-
-                    if (isset($_POST['condicion']) && $_POST['condicion'] != "") {
-                        $condicion = $conn->real_escape_string($_POST['condicion']);
-                        $sql .= " AND Condicion = '$condicion'";
                     }
 
                     if (isset($_POST['precioMin']) && $_POST['precioMin'] != "") {
@@ -207,20 +208,24 @@ require_once("conexion.php");
                         $sql .= " AND Cod_Producto IN (SELECT Cod_Producto FROM productoetiqueta WHERE Cod_Etiqueta = $etq_id)";
                     }
 
+                    $sql .= " GROUP BY Nombre";
+
+                    if (isset($_POST['condicion']) && $_POST['condicion'] != "") {
+                        $condicion = $conn->real_escape_string(strtoupper($_POST['condicion']));
+                        $sql .= " HAVING CondicionCombinada LIKE '%$condicion%'";
+                    }
+
                     if (isset($_POST['orden'])) {
                         switch ($_POST['orden']) {
                             case "precioASC":
                                 $sql .= " ORDER BY Precio ASC";
                             break;
-                                
                             case "precioDESC":
                                 $sql .= " ORDER BY Precio DESC";
                             break;
-                                
                             case "nombreASC":
                                 $sql .= " ORDER BY Nombre ASC";
                             break;
-                                
                             case "nombreDESC":
                                 $sql .= " ORDER BY Nombre DESC";
                             break;
@@ -243,7 +248,7 @@ require_once("conexion.php");
                                             
                                             <div id="infoBox">
                                                 <p style="font-size: 16px;"> <?php echo ($row['Nombre']); ?> 
-                                                     <span style="font-size: 14px; color: #ccc;">(<?php echo ($row['Condicion']); ?>)</span>
+                                                     <span style="font-size: 14px; color: #ccc;">(<?php echo ($row['CondicionCombinada']); ?>)</span>
                                                 </p>
                                                 <p style="font-size: 18px; font-weight: bold;"> $<?php echo ($row['Precio']); ?> <p>
                                             </div>

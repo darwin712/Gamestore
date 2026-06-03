@@ -132,7 +132,6 @@ require_once("../conexion.php");
                         echo '<table id="inventario">
                         <thead>
                             <tr>
-                                <th></th>
                                 <th>Nombre(s)</th>
                                 <th>Apellido Paterno</th>
                                 <th>Apellido Materno</th>

@@ -8,7 +8,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $descripcion = $conn->real_escape_string($_POST['Descripcion']);
     $precio = $conn->real_escape_string($_POST['Precio']);
     $unidades = $conn->real_escape_string($_POST['Unidades']);
-    $condicion = $conn->real_escape_string($_POST['Condicion']);
     $clasificacion = $conn->real_escape_string($_POST['Clasificacion']);
     $categoria = $conn->real_escape_string($_POST['Cod_Categoria']);
 
@@ -32,7 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 Clasificacion = '$clasificacion', 
                 Descripcion = '$descripcion', 
                 Cod_Categoria = '$categoria',
-                Condicion = '$condicion',
                 Imagen = '$ruta_bd'
             WHERE Cod_Producto = $id_producto";
 

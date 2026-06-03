@@ -72,10 +72,7 @@ if (isset($_GET['id'])) {
             </div>
 
             <div class="filaTriple">
-                <select name="Condicion" class="fieldSelect">
-                    <option value="NUEVO" <?php echo ($row['Condicion'] == 'NUEVO') ? 'selected' : ''; ?>>Nuevo</option>
-                    <option value="SEMINUEVO" <?php echo ($row['Condicion'] == 'SEMINUEVO') ? 'selected' : ''; ?>>Seminuevo</option>
-                </select>
+                <h4 style="text-align: left;"> Condición: <?php echo $row['Condicion']; ?></h4>
 
                 <select name="Clasificacion" class="fieldSelect">
                     <option value="E" <?php echo ($row['Clasificacion'] == 'E') ? 'selected' : ''; ?>>E</option>
