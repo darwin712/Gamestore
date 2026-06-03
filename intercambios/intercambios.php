@@ -73,6 +73,7 @@
                     <button type="button" id="seccion" onclick="window.location.href='../empleados/empleados.php'"> <img src="../_Multimedia_/empleados.png" class="icono-nav"> Empleados </button> 
                     <button type="button" id="seccion" onclick="window.location.href='../ventas/ventas.php'"> <img src="../_Multimedia_/ventas.png" class="icono-nav"> Ventas </button> 
                     <button type="button" id="seccion" onclick="window.location.href='../intercambios/intercambios.php'"> <img src="../_Multimedia_/intercambios.png" class="icono-nav"> Intercambios </button>
+                    <button type="button" id="seccion" onclick="window.location.href='../reporteFinanciero.php'"> <img src="../_Multimedia_/reporte.png" class="icono-nav"> Reporte Financiero </button>
                 </center>
             </nav>
         </header>
@@ -88,11 +89,13 @@
                             <select name="producto" class="fieldSelect" required>
                                 <option value="">Selecciona un producto</option>
                                 <?php
-                                    $sql_prod = "SELECT Cod_Producto, Nombre FROM producto WHERE Unidades > 0 AND Activo = 1";
+                                    $sql_prod = "SELECT Cod_Producto, Nombre, Unidades FROM producto WHERE Activo = 1";
                                     $res_prod = $conn->query($sql_prod);
                                     while($row_prod = $res_prod->fetch_assoc()):
                                         $sel = (isset($_POST['producto']) && $_POST['producto'] == $row_prod['Cod_Producto']) ? 'selected' : '';
-                                        echo "<option value='{$row_prod['Cod_Producto']}' $sel>{$row_prod['Nombre']}</option>";
+                                        $disabled = ($row_prod['Unidades'] <= 0) ? 'disabled' : '';
+                                        $texto = ($row_prod['Unidades'] <= 0) ? $row_prod['Nombre'] . " (Sin Stock)" : $row_prod['Nombre'];
+                                        echo "<option value='{$row_prod['Cod_Producto']}' $sel $disabled>$texto</option>";
                                     endwhile;
                                 ?>
                             </select>
@@ -103,8 +106,11 @@
                                 <option value="Bueno"> Bueno (40% del precio)</option>
                             </select>
 
-                            <input type="number" name="cantidad" min="1" value="1" placeholder="Cantidad"  class="fieldSmall" required>
-                            <input type="submit" value="Agregar">
+                            <div style="display: flex; gap: 10px; align-items: center; flex: 1;">
+                                <input type="number" name="cantidad" min="1" value="1" placeholder="Cantidad" class="fieldSmall" style="width: 80px; flex: none;">
+                                <input type="submit" value="Agregar" style="margin: 0;">
+                            </div>
+
                         </div>
                     </form>
                 </div>

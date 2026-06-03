@@ -21,6 +21,7 @@
                     <button type="button" id="seccion" onclick="window.location.href='../empleados/empleados.php'"> <img src="../_Multimedia_/empleados.png" class="icono-nav"> Empleados </button> 
                     <button type="button" id="seccion" onclick="window.location.href='../ventas/ventas.php'"> <img src="../_Multimedia_/ventas.png" class="icono-nav"> Ventas </button> 
                     <button type="button" id="seccion" onclick="window.location.href='../intercambios/intercambios.php'"> <img src="../_Multimedia_/intercambios.png" class="icono-nav"> Intercambios </button>
+                    <button type="button" id="seccion" onclick="window.location.href='../reporteFinanciero.php'"> <img src="../_Multimedia_/reporte.png" class="icono-nav"> Reporte Financiero </button>
                 </center>
             </nav>
         </header>
@@ -59,8 +60,11 @@
 
                         <input type="number" name="precioMax" placeholder="Monto máximo" id="miniField" value="<?php echo isset($_POST['precioMax']) ? $_POST['precioMax'] : ''; ?>">
 
+                        <div>
+                            <button type="submit" id="btnLupa"> <img src="../_Multimedia_/buscar.png" class="icono-nav" style="width: 30px; height: 25px; object-fit: contain;">  </button>
+                        </div>
                     </div>
-                    <button type="submit" hidden></button>
+
                 </form>
             </div>
 

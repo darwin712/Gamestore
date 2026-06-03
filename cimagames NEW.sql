@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 24-05-2026 a las 20:51:59
+-- Tiempo de generación: 03-06-2026 a las 00:38:06
 -- Versión del servidor: 8.0.17
 -- Versión de PHP: 7.3.10
 
@@ -86,7 +86,8 @@ CREATE TABLE `empleado` (
   `Apellido_Materno` varchar(50) NOT NULL,
   `Nombre` varchar(50) NOT NULL,
   `Telefono` varchar(15) NOT NULL,
-  `Turno` enum('Matutino','Vespertino','Mixto') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
+  `Turno` enum('Matutino','Vespertino','Mixto') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `Activo` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -144,17 +145,9 @@ CREATE TABLE `producto` (
   `Clasificacion` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `Condicion` enum('NUEVO','SEMINUEVO','','') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `Descripcion` varchar(255) DEFAULT NULL,
-  `Cod_Categoria` int(11) NOT NULL
+  `Cod_Categoria` int(11) NOT NULL,
+  `Activo` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Volcado de datos para la tabla `producto`
---
-
-INSERT INTO `producto` (`Cod_Producto`, `Imagen`, `Nombre`, `Precio`, `Unidades`, `Clasificacion`, `Condicion`, `Descripcion`, `Cod_Categoria`) VALUES
-(1, '', 'The Legend of Zelda: Tears of the Kingdom', '1199.99', 8, 'T (Teen)', 'NUEVO', 'Juego de aventura y acción en mundo abierto para Nintendo Switch.', 1),
-(2, '', 'PlayStation 5', '10500.00', 5, 'N/A', 'NUEVO', 'Consola de videojuegos de última generación con lector de discos.', 2),
-(4, 'Multimedia/networking-basics.png', 'Uno roblox', '15000.00', 7, 'M (Mature)', 'NUEVO', 'Uno en roblox', 1);
 
 -- --------------------------------------------------------
 
@@ -194,7 +187,7 @@ ALTER TABLE `categoria`
 -- Indices de la tabla `detalleintercambio`
 --
 ALTER TABLE `detalleintercambio`
-  ADD PRIMARY KEY (`Cod_Intercambio`,`Cod_Producto`),
+  ADD PRIMARY KEY (`Cod_Intercambio`,`Cod_Producto`,`Estado_Producto`) USING BTREE,
   ADD KEY `fk_di_producto` (`Cod_Producto`);
 
 --
@@ -258,7 +251,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `empleado`
 --
 ALTER TABLE `empleado`
-  MODIFY `Cod_Empleado` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Cod_Empleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `etiqueta`
@@ -270,19 +263,19 @@ ALTER TABLE `etiqueta`
 -- AUTO_INCREMENT de la tabla `intercambio`
 --
 ALTER TABLE `intercambio`
-  MODIFY `Cod_Intercambio` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Cod_Intercambio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `Cod_Producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Cod_Producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `Cod_Venta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Cod_Venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Restricciones para tablas volcadas

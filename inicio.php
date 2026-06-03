@@ -20,6 +20,7 @@ require_once("conexion.php");
                     <button type="button" id="seccion" onclick="window.location.href='../gamestore/empleados/empleados.php'"> <img src="_Multimedia_/empleados.png" class="icono-nav"> Empleados </button> 
                     <button type="button" id="seccion" onclick="window.location.href='../gamestore/ventas/ventas.php'"> <img src="_Multimedia_/ventas.png" class="icono-nav"> Ventas </button> 
                     <button type="button" id="seccion" onclick="window.location.href='../gamestore/intercambios/intercambios.php'"> <img src="_Multimedia_/intercambios.png" class="icono-nav"> Intercambios </button>
+                    <button type="button" id="seccion" onclick="window.location.href='reporteFinanciero.php'"> <img src="_Multimedia_/reporte.png" class="icono-nav"> Reporte Financiero </button>
                 </center>
             </nav>
         </header>
@@ -35,6 +36,10 @@ require_once("conexion.php");
 
         <div id="searchForm">
             <input type="text"placeholder="Buscar productos..." name="busqueda" id="busquedaInventario" value="<?php echo isset($_POST['busqueda']) ? $_POST['busqueda'] : ''; ?>">
+        </div>
+
+        <div>
+            <button type="submit" id="btnLupa"> <img src="_Multimedia_/buscar.png" class="icono-nav" style="width: 30px; height: 25px; object-fit: contain;">  </button>
         </div>
 
     </div>
@@ -222,7 +227,7 @@ require_once("conexion.php");
                     <?php
                         } 
                     } else {
-                        echo "<p> No hay productos disponibles por el momento.</p>";
+                        echo "<p style='text-align: center;'> No hay productos disponibles por el momento.</p>";
                     }
                     ?>
                 </div>

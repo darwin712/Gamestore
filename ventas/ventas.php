@@ -56,6 +56,7 @@
                     <button type="button" id="seccion" onclick="window.location.href='../empleados/empleados.php'"> <img src="../_Multimedia_/empleados.png" class="icono-nav"> Empleados </button> 
                     <button type="button" id="seccion" onclick="window.location.href='../ventas/ventas.php'"> <img src="../_Multimedia_/ventas.png" class="icono-nav"> Ventas </button> 
                     <button type="button" id="seccion" onclick="window.location.href='../intercambios/intercambios.php'"> <img src="../_Multimedia_/intercambios.png" class="icono-nav"> Intercambios </button>
+                    <button type="button" id="seccion" onclick="window.location.href='../reporteFinanciero.php'"> <img src="../_Multimedia_/reporte.png" class="icono-nav"> Reporte Financiero </button>
                 </center>
             </nav>
         </header>
@@ -72,17 +73,22 @@
                             <select name="producto" class="fieldSelect" required>
                                 <option value="">Selecciona un producto</option>
                                 <?php
-                                    $sql_cat = "SELECT Cod_producto, Nombre FROM producto WHERE Unidades > 0 AND Activo = 1";
+                                    $sql_cat = "SELECT Cod_producto, Nombre, Unidades FROM producto WHERE Activo = 1";
                                     $res_cat = $conn->query($sql_cat);
                                     while ($row_producto = $res_cat->fetch_assoc()) {
                                         $id_producto = $row_producto['Cod_producto'];
                                         $nombre_producto = $row_producto['Nombre'];
+                                        $unidades = $row_producto['Unidades'];
+                                        
+                                        $estado = ($unidades <= 0) ? "disabled" : "";
+                                        $etiqueta = ($unidades <= 0) ? " (Sin stock)" : "";
+                                        
                                         $seleccionado = (isset($_POST['producto']) && $_POST['producto'] == $id_producto) ? "selected" : "";
-                            
-                                        echo "<option value='$id_producto' $seleccionado>$nombre_producto</option>";
+                                        echo "<option value='$id_producto' $seleccionado $estado>$nombre_producto $etiqueta</option>";
                                     }
                                 ?>
                             </select>
+
                             <input type="number" name="cantidad" min="1" value="1" placeholder="Cantidad" class="fieldSmall" required>
                             <input type="submit" value="Agregar">
                         </div>
