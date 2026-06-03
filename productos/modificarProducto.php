@@ -87,6 +87,7 @@ if (isset($_GET['id'])) {
                     <option value="1" <?php echo ($row['Cod_Categoria'] == 1) ? 'selected' : ''; ?>>Videojuego</option>
                     <option value="2" <?php echo ($row['Cod_Categoria'] == 2) ? 'selected' : ''; ?>>Consola</option>
                     <option value="3" <?php echo ($row['Cod_Categoria'] == 3) ? 'selected' : ''; ?>>Accesorio</option>
+                    <option value="4" <?php echo ($row['Cod_Categoria'] == 4) ? 'selected' : ''; ?>>Juguetes</option>
                 </select>
             </div>
 
