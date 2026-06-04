@@ -48,9 +48,9 @@ require_once("../conexion.php");
 
         <div class="filaDoble">
 
-            <input type="number" step="0.01" name="Precio" class="fieldSmall" placeholder="Precio" required>
+            <input type="number" step="0.01" min="1" name="Precio" class="fieldSmall" placeholder="Precio" required>
 
-            <input type="number" name="Unidades" class="fieldSmall" placeholder="Stock" required>
+            <input type="number" min="0" name="Unidades" class="fieldSmall" placeholder="Stock" required>
 
         </div>
 

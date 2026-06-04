@@ -67,8 +67,8 @@ if (isset($_GET['id'])) {
             </div>
 
             <div class="filaDoble">
-                <input type="number" step="0.01" name="Precio" class="fieldSmall" placeholder="Precio" value="<?php echo $row['Precio']; ?>" required>
-                <input type="number" name="Unidades" class="fieldSmall" placeholder="Stock" value="<?php echo $row['Unidades']; ?>" required>
+                <input type="number" step="0.01" min="1" name="Precio" class="fieldSmall" placeholder="Precio" value="<?php echo $row['Precio']; ?>" required>
+                <input type="number" min="0" name="Unidades" class="fieldSmall" placeholder="Stock" value="<?php echo $row['Unidades']; ?>" required>
             </div>
 
             <div class="filaTriple">
