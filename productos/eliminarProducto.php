@@ -2,6 +2,7 @@
     require_once("../conexion.php");
 
     function mostrarAlerta($titulo, $mensaje, $urlDestino = 'inventarios.php') {
+        // ... (Todo el código HTML de tu función mostrarAlerta se queda exactamente igual) ...
         echo '<!DOCTYPE html>
         <html>
         <head>
@@ -52,12 +53,16 @@ if (isset($_GET['id'])) {
     $total_registros = $row_check['total_registros'];
 
     if ($total_registros == 0) {
+        $sql_delete_etiquetas = "DELETE FROM productoetiqueta WHERE Cod_Producto = $id_producto";
+        $conn->query($sql_delete_etiquetas); 
+        
         $sql_delete = "DELETE FROM producto WHERE Cod_Producto = $id_producto";
         if ($conn->query($sql_delete) === TRUE) {
             mostrarAlerta('¡Producto Eliminado!', 'El producto ha sido eliminado permanentemente.');
         } else {
             mostrarAlerta('Error', 'No se pudo eliminar: ' . $conn->error);
         }
+        
     } else {
         $sql_update = "UPDATE producto SET Activo = 0 WHERE Cod_Producto = $id_producto";
         if ($conn->query($sql_update) === TRUE) {
@@ -69,5 +74,4 @@ if (isset($_GET['id'])) {
 } else {
     mostrarAlerta('Acceso Denegado', 'No se especificó ningún producto.');
 }
-
 ?>
