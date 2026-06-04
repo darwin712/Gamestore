@@ -2,7 +2,6 @@
     require_once("../conexion.php");
 
     function mostrarAlerta($titulo, $mensaje, $urlDestino = 'inventarios.php') {
-        // ... (Todo el código HTML de tu función mostrarAlerta se queda exactamente igual) ...
         echo '<!DOCTYPE html>
         <html>
         <head>

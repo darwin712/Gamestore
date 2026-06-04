@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 03-06-2026 a las 00:38:06
+-- Tiempo de generación: 04-06-2026 a las 18:44:18
 -- Versión del servidor: 8.0.17
 -- Versión de PHP: 7.3.10
 
@@ -90,6 +90,15 @@ CREATE TABLE `empleado` (
   `Activo` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Volcado de datos para la tabla `empleado`
+--
+
+INSERT INTO `empleado` (`Cod_Empleado`, `Apellido_Paterno`, `Apellido_Materno`, `Nombre`, `Telefono`, `Turno`, `Activo`) VALUES
+(9, 'Ordorica', 'Ruiz', 'David Rey', '31532131', 'Vespertino', 1),
+(10, 'Trujillo', 'Vega', 'Andre Neftali', '1231312325', 'Mixto', 1),
+(11, 'Gaxiola', 'Davalos', 'Santiago Emanuel', '7317325216', 'Matutino', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -142,12 +151,27 @@ CREATE TABLE `producto` (
   `Nombre` varchar(100) NOT NULL,
   `Precio` decimal(10,2) NOT NULL,
   `Unidades` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `Clasificacion` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `Condicion` enum('NUEVO','SEMINUEVO','','') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `Clasificacion` enum('E','T','M') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `Condicion` enum('NUEVO','SEMINUEVO') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `Descripcion` varchar(255) DEFAULT NULL,
   `Cod_Categoria` int(11) NOT NULL,
   `Activo` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`Cod_Producto`, `Imagen`, `Nombre`, `Precio`, `Unidades`, `Clasificacion`, `Condicion`, `Descripcion`, `Cod_Categoria`, `Activo`) VALUES
+(25, '_Portadas_/Mario-Kart-World-boxart.jpg', 'Mario Kart World', '1799.99', 21, 'E', 'NUEVO', 'Mario carreras', 1, 1),
+(26, '_Portadas_/81N0cxaqEYL._AC_SL1500_.jpg', 'Resident Evil 2', '599.99', 51, 'M', 'NUEVO', 'residente malo', 1, 1),
+(27, '_Portadas_/81p2yT3GJIL.jpg', 'Minecraft', '399.99', 46, 'E', 'NUEVO', 'cubos', 1, 1),
+(28, '_Portadas_/Super_Smash_Bros_Melee_box_art.png', 'Super Smash Bros. Melee', '599.99', 3, 'T', 'SEMINUEVO', 'luchas peleas', 1, 1),
+(29, '_Portadas_/616X8zng9wS.jpg', 'Playstation 5', '10899.99', 3, 'E', 'NUEVO', 'gaming a otro nivel', 2, 1),
+(30, '_Portadas_/61rUMbRaMtL.jpg', 'Mando de Xbox', '999.99', 22, 'E', 'NUEVO', 'Color blanco, sin drift', 3, 1),
+(31, '_Portadas_/sanshee_five-nights-at-fredd_s_freddy-plush_updated.webp', 'Peluche de Freddy Fazbear', '259.99', 49, 'E', 'NUEVO', 'haur haur haur haur', 4, 1),
+(32, '_Portadas_/D_NQ_NP_771279-MLA99538697354_122025-O.webp', 'Nintendo Switch 2', '12999.99', 0, 'E', 'NUEVO', 'consola para toda la familia', 2, 1),
+(33, '_Portadas_/images.jfif', 'Wii Party', '899.00', 66, 'E', 'SEMINUEVO', 'Videojuego', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -159,6 +183,26 @@ CREATE TABLE `productoetiqueta` (
   `Cod_Producto` int(11) NOT NULL,
   `Cod_Etiqueta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `productoetiqueta`
+--
+
+INSERT INTO `productoetiqueta` (`Cod_Producto`, `Cod_Etiqueta`) VALUES
+(26, 1),
+(28, 1),
+(33, 1),
+(27, 2),
+(33, 4),
+(26, 5),
+(25, 6),
+(27, 6),
+(25, 7),
+(27, 7),
+(33, 7),
+(25, 8),
+(27, 8),
+(26, 9);
 
 -- --------------------------------------------------------
 
@@ -251,7 +295,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `empleado`
 --
 ALTER TABLE `empleado`
-  MODIFY `Cod_Empleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Cod_Empleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `etiqueta`
@@ -263,19 +307,19 @@ ALTER TABLE `etiqueta`
 -- AUTO_INCREMENT de la tabla `intercambio`
 --
 ALTER TABLE `intercambio`
-  MODIFY `Cod_Intercambio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `Cod_Intercambio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `Cod_Producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `Cod_Producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `Cod_Venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `Cod_Venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Restricciones para tablas volcadas
