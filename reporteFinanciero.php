@@ -45,10 +45,20 @@ require_once("conexion.php");
                             ORDER BY Fecha DESC, Folio DESC";
 
                     $result = $conn->query($sql);
-                    $totalGeneral = 0;
+                    
+                    $totalVentas = 0;
+                    $totalIntercambios = 0;
 
                     while($row = $result->fetch_assoc()) {
-                        $totalGeneral += $row['Monto'];
+                        if ($row['Tipo_Movimiento'] == 'VENTA') {
+                            $totalVentas += $row['Monto'];
+                            $colorMonto = "color: green; font-weight: bold;";
+                            $signo = "+ $";
+                        } else {
+                            $totalIntercambios += $row['Monto'];
+                            $colorMonto = "color: red; font-weight: bold;";
+                            $signo = "- $";
+                        }
                     ?>
                         <tr>
                             <td style="font-weight: bold;"><?= $row['Tipo_Movimiento'] ?></td>
@@ -57,12 +67,25 @@ require_once("conexion.php");
                                 echo $prefijo . str_pad($row['Folio'], 4, '0', STR_PAD_LEFT); 
                             ?> </td>
                             <td><?= $row['Fecha'] ?></td>
-                            <td>$<?= number_format($row['Monto'], 2) ?></td>
+                            <td style="<?= $colorMonto ?>"><?= $signo . number_format($row['Monto'], 2) ?></td>
                         </tr>
-                    <?php } ?>
-                    <tr style="background: #d6eef8; font-weight: bold;">
-                        <td colspan="3" style="text-align: right; padding-right: 20px;">Total acumulado:</td>
-                        <td>$<?= number_format($totalGeneral, 2) ?></td>
+                    <?php } 
+                    
+                    $balanceGeneral = $totalVentas - $totalIntercambios;
+                    $colorBalance = ($balanceGeneral >= 0) ? "color: green;" : "color: red;";
+                    ?>
+                    
+                    <tr style="background: #e8f5e9; font-weight: bold;">
+                        <td colspan="3" style="text-align: right; padding-right: 20px;">Total Ingresos (Ventas):</td>
+                        <td style="color: green;">+ $<?= number_format($totalVentas, 2) ?></td>
+                    </tr>
+                    <tr style="background: #ffebee; font-weight: bold;">
+                        <td colspan="3" style="text-align: right; padding-right: 20px;">Total Egresos (Intercambios):</td>
+                        <td style="color: red;">- $<?= number_format($totalIntercambios, 2) ?></td>
+                    </tr>
+                    <tr style="background: #d6eef8; font-weight: bold; font-size: 1.1em;">
+                        <td colspan="3" style="text-align: right; padding-right: 20px;">Balance General en Caja:</td>
+                        <td style="<?= $colorBalance ?>">$<?= number_format($balanceGeneral, 2) ?></td>
                     </tr>
                 </tbody>
             </table>
